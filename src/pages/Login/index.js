@@ -8,8 +8,7 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleCLick = () => {
     setEmail();
     setPassword();
   };
@@ -27,7 +26,7 @@ function Login() {
 
   return (
     <main>
-      <form onSubmit={ handleSubmit }>
+      <form>
         <fieldset>
           <h1>Login</h1>
           <TextField
@@ -45,6 +44,8 @@ function Login() {
             value={ password }
           />
           <Button
+            type="button"
+            onClick={ handleCLick }
             variant="contained"
             color="primary"
             data-testid="login-submit-btn"
