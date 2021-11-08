@@ -1,16 +1,14 @@
-import * as React from 'react';
-// import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import Button from '@material-ui/core/Button';
-import { TextField } from '@material-ui/core';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router';
+import Input from '../../components/Input';
 
 function Login() {
+  const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleCLick = () => {
-    setEmail();
-    setPassword();
+    history.push('/comidas');
   };
 
   const validateEmail = () => {
@@ -20,42 +18,39 @@ function Login() {
 
   const validatePassword = () => {
     const MIN_PASSWORD = 6;
-    if (password.length >= MIN_PASSWORD) return true;
-    return false;
+    return (password.length >= MIN_PASSWORD);
   };
 
   return (
-    <main>
-      <form>
-        <fieldset>
-          <h1>Login</h1>
-          <TextField
-            label="Email"
-            data-testid="email-input"
-            onChange={ ({ target }) => setEmail(target.value) }
-            type="email"
-            value={ email }
-          />
-          <TextField
-            label="Senha"
-            data-testid="password-input"
-            onChange={ ({ target }) => setPassword(target.value) }
-            type="password"
-            value={ password }
-          />
-          <Button
-            type="button"
-            onClick={ handleCLick }
-            variant="contained"
-            color="primary"
-            data-testid="login-submit-btn"
-            disable={ !validatePassword() || !validateEmail() }
-          >
-            Entrar
-          </Button>
-        </fieldset>
-      </form>
-    </main>
+    <form>
+      <fieldset>
+        <Input
+          htmlFor="email"
+          label="Email"
+          type="email"
+          id="email"
+          name="email"
+          value={ email }
+          onChange={ ({ target }) => setEmail(target.value) }
+        />
+        <Input
+          htmlFor="password"
+          label="Password"
+          type="password"
+          id="password"
+          name="password"
+          value={ password }
+          onChange={ ({ target }) => setPassword(target.value) }
+        />
+        <button
+          disabled={ !validateEmail() || !validatePassword() }
+          type="button"
+          onClick={ () => handleCLick() }
+        >
+          Login
+        </button>
+      </fieldset>
+    </form>
   );
 }
 
