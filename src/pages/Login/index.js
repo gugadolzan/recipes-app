@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import Input from '../../components/Input';
+import storage from '../../services/storage';
 
 function Login() {
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleCLick = () => {
+  const handleCLick = async () => {
+    storage.write('mealsToken', '1');
+    storage.write('cocktailsToken', '1');
+    storage.write('email', email);
     history.push('/comidas');
   };
 
