@@ -1,4 +1,5 @@
-// referência do projeto do Trivia group 5
+// Reference: <https://github.com/tryber/sd-014-a-project-trivia-react-redux/pull/86>
+
 // storage: object that handles reading/writing data from/to localStorage
 const storage = {
   // read: loads data from localStorage

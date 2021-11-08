@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
-import LoginInput from './LoginInput';
+
 import storage from '../../services/storage';
+import LoginInput from './LoginInput';
+
+import './Login.css';
 
 function Login() {
   const history = useHistory();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -27,26 +31,24 @@ function Login() {
   };
 
   return (
-    <form onSubmit={ handleCLick }>
-      <fieldset>
-        <LoginInput
-          name="email"
-          onChange={ ({ target }) => setEmail(target.value) }
-          value={ email }
-        />
-        <LoginInput
-          name="password"
-          onChange={ ({ target }) => setPassword(target.value) }
-          value={ password }
-        />
-        <button
-          data-testid="login-submit-btn"
-          disabled={ !validateEmail() || !validatePassword() }
-          type="submit"
-        >
-          Login
-        </button>
-      </fieldset>
+    <form className="login-form" onSubmit={ handleCLick }>
+      <LoginInput
+        name="email"
+        onChange={ ({ target }) => setEmail(target.value) }
+        value={ email }
+      />
+      <LoginInput
+        name="password"
+        onChange={ ({ target }) => setPassword(target.value) }
+        value={ password }
+      />
+      <button
+        data-testid="login-submit-btn"
+        disabled={ !validateEmail() || !validatePassword() }
+        type="submit"
+      >
+        Login
+      </button>
     </form>
   );
 }
