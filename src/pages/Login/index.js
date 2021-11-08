@@ -10,9 +10,9 @@ function Login() {
 
   const handleCLick = async (e) => {
     e.preventDefault();
-    storage.write('mealsToken', '1');
-    storage.write('cocktailsToken', '1');
-    storage.write('email', email);
+    storage.write('mealsToken', 1);
+    storage.write('cocktailsToken', 1);
+    storage.write('user', { email });
     history.push('/comidas');
   };
 
@@ -23,7 +23,7 @@ function Login() {
 
   const validatePassword = () => {
     const MIN_PASSWORD = 6;
-    return password.length >= MIN_PASSWORD;
+    return password.length > MIN_PASSWORD;
   };
 
   return (
