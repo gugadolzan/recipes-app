@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
-import Input from '../../components/Input';
+import LoginInput from './LoginInput';
 
 function Login() {
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleCLick = () => {
+  const handleCLick = (e) => {
+    e.preventDefault();
     history.push('/comidas');
   };
 
@@ -18,34 +19,26 @@ function Login() {
 
   const validatePassword = () => {
     const MIN_PASSWORD = 6;
-    return (password.length >= MIN_PASSWORD);
+    return password.length >= MIN_PASSWORD;
   };
 
   return (
-    <form>
+    <form onSubmit={ handleCLick }>
       <fieldset>
-        <Input
-          htmlFor="email"
-          label="Email"
-          type="email"
-          id="email"
+        <LoginInput
           name="email"
-          value={ email }
           onChange={ ({ target }) => setEmail(target.value) }
+          value={ email }
         />
-        <Input
-          htmlFor="password"
-          label="Password"
-          type="password"
-          id="password"
+        <LoginInput
           name="password"
-          value={ password }
           onChange={ ({ target }) => setPassword(target.value) }
+          value={ password }
         />
         <button
+          data-testid="login-submit-btn"
           disabled={ !validateEmail() || !validatePassword() }
-          type="button"
-          onClick={ () => handleCLick() }
+          type="submit"
         >
           Login
         </button>
