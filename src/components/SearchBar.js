@@ -5,6 +5,8 @@ import RecipesContext from '../context/RecipesContext';
 import api from '../services/api';
 import SearchRadio from './SearchRadio';
 
+import '../styles/SearchBar.css';
+
 function SearchBar() {
   const { setRecipes } = useContext(RecipesContext);
 
@@ -33,7 +35,9 @@ function SearchBar() {
     }
 
     if (response[key].length === 1) {
-      return redirectToDetails(response[key][0].idDrink || response[key][0].idMeal);
+      return redirectToDetails(
+        response[key][0].idDrink || response[key][0].idMeal,
+      );
     }
 
     setRecipes(response[key]);
@@ -62,16 +66,16 @@ function SearchBar() {
   };
 
   return (
-    <div>
-      <h2>SearchBar</h2>
-      <form onSubmit={ handleSubmit }>
-        <input
-          data-testid="search-input"
-          onChange={ ({ target }) => setSearchInput(target.value) }
-          placeholder="Buscar receita"
-          type="text"
-          value={ searchInput }
-        />
+    <form className="search-bar" onSubmit={ handleSubmit }>
+      <input
+        className="search-bar-input"
+        data-testid="search-input"
+        onChange={ ({ target }) => setSearchInput(target.value) }
+        placeholder="Buscar receita"
+        type="text"
+        value={ searchInput }
+      />
+      <div className="search-radio-container">
         <SearchRadio
           checked={ searchRadio === 'ingredient' }
           id="ingredient"
@@ -93,15 +97,16 @@ function SearchBar() {
           name="search-radio"
           onChange={ ({ target }) => setSearchRadio(target.value) }
         />
-        <button
-          data-testid="exec-search-btn"
-          disabled={ !searchInput || !searchRadio }
-          type="submit"
-        >
-          Buscar
-        </button>
-      </form>
-    </div>
+      </div>
+      <button
+        className="search-bar-button"
+        data-testid="exec-search-btn"
+        disabled={ !searchInput || !searchRadio }
+        type="submit"
+      >
+        Buscar
+      </button>
+    </form>
   );
 }
 
