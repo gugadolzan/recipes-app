@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 
+import RecipesContext from '../context/RecipesContext';
 import api from '../services/api';
 import SearchRadio from './SearchRadio';
 
 function SearchBar() {
+  const { setRecipes } = useContext(RecipesContext);
+
   const history = useHistory();
 
   const { pathname } = useLocation();
@@ -33,8 +36,7 @@ function SearchBar() {
       redirectToDetails(response[key][0].idDrink || response[key][0].idMeal);
     }
 
-    // console.log(response[key]);
-    // save to global state
+    setRecipes(response[key]);
   };
 
   const handleSubmit = (e) => {
