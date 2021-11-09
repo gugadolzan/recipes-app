@@ -1,41 +1,58 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 
 import api from '../services/api';
 import SearchRadio from './SearchRadio';
 
 function SearchBar() {
+  const history = useHistory();
+
   const { pathname } = useLocation();
 
   const [searchInput, setSearchInput] = useState('');
   const [searchRadio, setSearchRadio] = useState('');
 
-  const fetchData = (path, endpoint) => (path === '/comidas'
-    ? api.mealDB(endpoint)
-    : api.cocktailDB(endpoint));
+  const redirectToDetails = (id) => {
+    history.push(`${pathname}/${id}`);
+  };
+
+  const fetchData = async (endpoint) => {
+    const response = pathname === '/comidas'
+      ? await api.mealDB(endpoint)
+      : await api.cocktailDB(endpoint);
+
+    const key = Object.keys(response);
+
+    if (!response[key]) {
+      return global.alert(
+        'Sinto muito, não encontramos nenhuma receita para esses filtros.',
+      );
+    }
+
+    if (response[key].length === 1) {
+      redirectToDetails(response[key][0].idDrink || response[key][0].idMeal);
+    }
+
+    // console.log(response[key]);
+    // save to global state
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     switch (searchRadio) {
     case 'ingredient':
-      fetchData(pathname, `/filter.php?i=${searchInput}`).then((response) => {
-        console.log(response);
-      });
+      fetchData(`/filter.php?i=${searchInput}`);
       break;
     case 'name':
-      fetchData(pathname, `/search.php?s=${searchInput}`).then((response) => {
-        console.log(response);
-      });
+      fetchData(`/search.php?s=${searchInput}`);
       break;
     case 'first-letter':
       if (searchInput.length > 1) {
         return global.alert('Sua busca deve conter somente 1 (um) caracter');
+        // alert when search input is more than 1 character
       }
-
-      fetchData(pathname, `/search.php?f=${searchInput}`).then((response) => {
-        console.log(response);
-      });
+      fetchData(`/search.php?f=${searchInput}`);
       break;
     default:
       break;
