@@ -1,0 +1,16 @@
+.recipe-card {
+  align-items: center;
+  border: 0.1rem solid black;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1rem auto;
+  padding: 1rem;
+  width: 80%;
+}
+
+.recipe-card-image {
+  height: 100%;
+  width: 100%;
+}

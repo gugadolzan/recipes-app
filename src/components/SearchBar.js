@@ -33,7 +33,7 @@ function SearchBar() {
     }
 
     if (response[key].length === 1) {
-      redirectToDetails(response[key][0].idDrink || response[key][0].idMeal);
+      return redirectToDetails(response[key][0].idDrink || response[key][0].idMeal);
     }
 
     setRecipes(response[key]);
