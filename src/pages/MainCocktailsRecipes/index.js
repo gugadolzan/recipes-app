@@ -11,14 +11,16 @@ function MainCocktailsRecipes() {
     <div>
       <h1>MainCocktailsRecipes</h1>
       <SearchBar />
-      {recipes.map(({ idDrink, strDrink, strDrinkThumb }) => (
-        <RecipeCard
-          key={ idDrink }
-          id={ idDrink }
-          title={ strDrink }
-          image={ strDrinkThumb }
-        />
-      ))}
+      <div className="cocktails-recipes-container">
+        {recipes.map(({ idDrink, strDrink, strDrinkThumb }) => (
+          <RecipeCard
+            key={ idDrink }
+            id={ idDrink }
+            title={ strDrink }
+            image={ strDrinkThumb }
+          />
+        ))}
+      </div>
     </div>
   );
 }

@@ -4,6 +4,8 @@ import RecipeCard from '../../components/RecipeCard';
 import SearchBar from '../../components/SearchBar';
 import RecipesContext from '../../context/RecipesContext';
 
+import './MainMealsRecipes.css';
+
 function MainMealsRecipes() {
   const { recipes } = useContext(RecipesContext);
 
@@ -11,14 +13,16 @@ function MainMealsRecipes() {
     <div>
       <h1>MainMealsRecipes</h1>
       <SearchBar />
-      {recipes.map(({ idMeal, strMeal, strMealThumb }) => (
-        <RecipeCard
-          key={ idMeal }
-          id={ idMeal }
-          title={ strMeal }
-          image={ strMealThumb }
-        />
-      ))}
+      <div className="meals-recipes-container">
+        {recipes.map(({ idMeal, strMeal, strMealThumb }) => (
+          <RecipeCard
+            key={ idMeal }
+            id={ idMeal }
+            title={ strMeal }
+            image={ strMealThumb }
+          />
+        ))}
+      </div>
     </div>
   );
 }

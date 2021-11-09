@@ -6,8 +6,7 @@
   flex-direction: column;
   justify-content: center;
   margin: 1rem auto;
-  padding: 1rem;
-  width: 80%;
+  width: 20rem;
 }
 
 .recipe-card-image {
