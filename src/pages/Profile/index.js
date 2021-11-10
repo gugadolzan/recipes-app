@@ -5,12 +5,13 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
 function Profile() {
-  const { email } = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user'));
+  const email = user ? user.email : null;
 
   return (
     <>
       <Header />
-      <h2 data-testid="profile-email">{email}</h2>
+      <h2 data-testid="profile-email">{ email }</h2>
       <Link data-testid="profile-done-btn" to="/receitas-feitas">
         Receitas Feitas
       </Link>
