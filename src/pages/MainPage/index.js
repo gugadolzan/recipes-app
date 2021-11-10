@@ -9,13 +9,16 @@ import { methods } from '../../services/api';
 
 import './MainPage.css';
 
-function MainPage() {
-  const MAX_CATEGORIES = 5;
-  const MAX_RECIPES = 12;
+const { filterByCategory } = methods;
+const MAX_CATEGORIES = 5;
+const MAX_RECIPES = 12;
 
+function MainPage() {
   const { cocktailsRecipes, mealsRecipes } = useContext(RecipesContext);
   const { pathname } = useLocation();
   const [categories, setCategories] = useState([]);
+  const [filter, setFilter] = useState('');
+  const [filteredRecipes, setFilteredRecipes] = useState([]);
 
   const recipes = pathname === '/comidas'
     ? mealsRecipes.slice(0, MAX_RECIPES)
@@ -26,9 +29,7 @@ function MainPage() {
       const response = pathname === '/comidas'
         ? await methods.listAllCategories('mealDB')
         : await methods.listAllCategories('cocktailDB');
-
       const key = Object.keys(response);
-
       const keyCategories = response[key]
         .map((category) => category.strCategory)
         .slice(0, MAX_CATEGORIES);
@@ -39,6 +40,27 @@ function MainPage() {
     fetchCategories();
   }, [pathname]);
 
+  const handleCategoryClick = async (category) => {
+    if (filteredRecipes.length === 0 || filter !== category) {
+      const apiKey = pathname === '/comidas' ? 'mealDB' : 'cocktailDB';
+      const response = await filterByCategory(apiKey, category);
+      const recipeKey = Object.keys(response);
+
+      setFilter(category);
+      setFilteredRecipes(response[recipeKey].slice(0, MAX_RECIPES));
+    } else {
+      setFilteredRecipes([]);
+    }
+  };
+
+  const renderRecipeCard = (recipe, index) => (
+    <RecipeCard
+      index={ index }
+      key={ pathname === '/comidas' ? recipe.idMeal : recipe.idDrink }
+      recipe={ recipe }
+    />
+  );
+
   return (
     <>
       <Header />
@@ -47,20 +69,18 @@ function MainPage() {
           <button
             data-testid={ `${category}-category-filter` }
             key={ category }
+            onClick={ ({ target }) => handleCategoryClick(target.innerText) }
             type="button"
+            value={ category }
           >
             {category}
           </button>
         ))}
       </div>
       <div className="meals-recipes-container">
-        {recipes.map((recipe, index) => (
-          <RecipeCard
-            index={ index }
-            key={ pathname === '/comidas' ? recipe.idMeal : recipe.idDrink }
-            recipe={ recipe }
-          />
-        ))}
+        {filteredRecipes.length === 0
+          ? recipes.map((recipe, index) => renderRecipeCard(recipe, index))
+          : filteredRecipes.map((recipe, index) => renderRecipeCard(recipe, index))}
       </div>
       <Footer />
     </>

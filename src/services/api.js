@@ -20,10 +20,13 @@ const api = {
 };
 
 export const methods = {
-  searchByIngredient: (key, ingredient) => api[key](`filter.php?i=${ingredient}`),
-  searchByName: (key, name) => api[key](`search.php?s=${name}`),
-  searchByFirstLetter: (key, letter) => api[key](`search.php?f=${letter}`),
+  filterByCategory: (key, category) => api[key](`filter.php?c=${category}`),
   listAllCategories: (key) => api[key]('list.php?c=list'),
+  searchBy: {
+    ingredient: (key, ingredient) => api[key](`filter.php?i=${ingredient}`),
+    name: (key, name) => api[key](`search.php?s=${name}`),
+    firstLetter: (key, letter) => api[key](`search.php?f=${letter}`),
+  },
 };
 
 export default api;
