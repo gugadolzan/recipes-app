@@ -19,4 +19,11 @@ const api = {
   // Reference: <https://www.thecocktaildb.com/api.php>
 };
 
+export const methods = {
+  searchByIngredient: (key, ingredient) => api[key](`filter.php?i=${ingredient}`),
+  searchByName: (key, name) => api[key](`search.php?s=${name}`),
+  searchByFirstLetter: (key, letter) => api[key](`search.php?f=${letter}`),
+  listAllCategories: (key) => api[key]('list.php?c=list'),
+};
+
 export default api;

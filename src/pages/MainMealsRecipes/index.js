@@ -1,14 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import RecipeCard from '../../components/RecipeCard';
 import RecipesContext from '../../context/RecipesContext';
 
+import { methods } from '../../services/api';
+
 import './MainMealsRecipes.css';
 
 function MainMealsRecipes() {
   const { mealsRecipes } = useContext(RecipesContext);
+
+  const [mealCategories, setMealCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const response = await methods.listAllCategories('mealDB');
+      const key = Object.keys(response);
+      const categories = response[key].map((category) => category.strCategory);
+      setMealCategories(categories);
+    };
+    fetchCategories();
+  }, []);
 
   const MAX_RECIPES = 12;
 
