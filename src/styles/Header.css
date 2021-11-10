@@ -6,6 +6,7 @@
 }
 
 .page-title {
+  font-size: 1.5rem;
   margin: auto;
   text-align: center;
 }
@@ -13,7 +14,7 @@
 .profile-top-btn {
   left: 0.5rem;
   position: absolute;
-  top: 0.5rem;
+  top: 1rem;
 }
 
 .search-top-btn {
@@ -21,5 +22,5 @@
   border: none;
   position: absolute;
   right: 0.5rem;
-  top: 0.5rem;
+  top: 1rem;
 }
