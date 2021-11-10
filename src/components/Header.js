@@ -6,6 +6,8 @@ import SearchBar from './SearchBar';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
+import '../styles/Header.css';
+
 const PAGE_TITLES = {
   '/comidas': 'Comidas',
   '/bebidas': 'Bebidas',
@@ -43,30 +45,35 @@ function Header() {
   // };
 
   const searchTopButton = () => (
-    <button type="button" onClick={ () => setShowSearchBar(!showSearchBar) }>
+    <button
+      className="search-top-btn"
+      onClick={ () => setShowSearchBar(!showSearchBar) }
+      type="button"
+    >
       <img alt="search icon" data-testid="search-top-btn" src={ searchIcon } />
     </button>
   );
 
   return (
-    <header>
-      <Link to="/perfil">
-        <img
-          alt="profile icon"
-          data-testid="profile-top-btn"
-          src={ profileIcon }
-        />
-      </Link>
-
-      <span data-testid="page-title">{PAGE_TITLES[pathname]}</span>
-
-      {(pathname === '/comidas'
-        || pathname === '/bebidas'
-        || pathname === '/explorar/comidas/area')
-        && searchTopButton()}
-
+    <>
+      <header className="header">
+        <Link className="profile-top-btn" to="/perfil">
+          <img
+            alt="profile icon"
+            data-testid="profile-top-btn"
+            src={ profileIcon }
+          />
+        </Link>
+        <span className="page-title" data-testid="page-title">
+          {PAGE_TITLES[pathname]}
+        </span>
+        {(pathname === '/comidas'
+          || pathname === '/bebidas'
+          || pathname === '/explorar/comidas/area')
+          && searchTopButton()}
+      </header>
       {showSearchBar && <SearchBar />}
-    </header>
+    </>
   );
 }
 

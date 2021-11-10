@@ -1,7 +1,9 @@
 .footer {
+  background-color: #ccc;
   bottom: 0;
   display: flex;
   justify-content: space-evenly;
+  padding: 0.5rem 0;
   position: fixed;
   width: 100%;
 }

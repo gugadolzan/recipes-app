@@ -1,0 +1,25 @@
+.header {
+  align-items: center;
+  background-color: #ccc;
+  display: flex;
+  padding: 1rem;
+}
+
+.page-title {
+  margin: auto;
+  text-align: center;
+}
+
+.profile-top-btn {
+  left: 0.5rem;
+  position: absolute;
+  top: 0.5rem;
+}
+
+.search-top-btn {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+}
