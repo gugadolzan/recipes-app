@@ -7,6 +7,19 @@ import SearchRadio from './SearchRadio';
 
 import '../styles/SearchBar.css';
 
+const SEARCH_RADIO_OPTIONS = [
+  {
+    id: 'ingredient',
+    label: 'Ingrediente',
+  }, {
+    id: 'name',
+    label: 'Nome',
+  }, {
+    id: 'first-letter',
+    label: 'Primeira letra',
+  },
+];
+
 function SearchBar() {
   const { setRecipes } = useContext(RecipesContext);
 
@@ -76,27 +89,16 @@ function SearchBar() {
         value={ searchInput }
       />
       <div className="search-radio-container">
-        <SearchRadio
-          checked={ searchRadio === 'ingredient' }
-          id="ingredient"
-          label="Ingrediente"
-          name="search-radio"
-          onChange={ ({ target }) => setSearchRadio(target.value) }
-        />
-        <SearchRadio
-          checked={ searchRadio === 'name' }
-          id="name"
-          label="Nome"
-          name="search-radio"
-          onChange={ ({ target }) => setSearchRadio(target.value) }
-        />
-        <SearchRadio
-          checked={ searchRadio === 'first-letter' }
-          id="first-letter"
-          label="Primeira letra"
-          name="search-radio"
-          onChange={ ({ target }) => setSearchRadio(target.value) }
-        />
+        {SEARCH_RADIO_OPTIONS.map(({ label, id }) => (
+          <SearchRadio
+            key={ id }
+            checked={ searchRadio === id }
+            id={ id }
+            label={ label }
+            name="search-radio"
+            onChange={ ({ target }) => setSearchRadio(target.value) }
+          />
+        ))}
       </div>
       <button
         className="search-bar-button"
