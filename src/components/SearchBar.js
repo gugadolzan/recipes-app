@@ -38,6 +38,7 @@ function SearchBar() {
     const response = pathname === '/comidas'
       ? await api.mealDB(endpoint)
       : await api.cocktailDB(endpoint);
+    console.log(response);
 
     const key = Object.keys(response);
 
