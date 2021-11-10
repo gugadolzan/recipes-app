@@ -1,9 +1,10 @@
 import React from 'react';
+import Comidas from './Comidas';
 
 function ExploreMeals() {
   return (
     <div>
-      <h1>ExploreMeals</h1>
+      <Comidas />
     </div>
   );
 }
