@@ -1,16 +1,18 @@
 import React, { useContext } from 'react';
 
+import Footer from '../../components/Footer';
+import Header from '../../components/Header';
 import RecipeCard from '../../components/RecipeCard';
-import SearchBar from '../../components/SearchBar';
 import RecipesContext from '../../context/RecipesContext';
+
+import './MainCocktailsRecipes.css';
 
 function MainCocktailsRecipes() {
   const { recipes } = useContext(RecipesContext);
 
   return (
-    <div>
-      <h1>MainCocktailsRecipes</h1>
-      <SearchBar />
+    <>
+      <Header />
       <div className="cocktails-recipes-container">
         {recipes.map(({ idDrink, strDrink, strDrinkThumb }) => (
           <RecipeCard
@@ -21,7 +23,8 @@ function MainCocktailsRecipes() {
           />
         ))}
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 

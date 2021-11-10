@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 
+import Footer from '../../components/Footer';
+import Header from '../../components/Header';
 import RecipeCard from '../../components/RecipeCard';
-import SearchBar from '../../components/SearchBar';
 import RecipesContext from '../../context/RecipesContext';
 
 import './MainMealsRecipes.css';
@@ -10,9 +11,8 @@ function MainMealsRecipes() {
   const { recipes } = useContext(RecipesContext);
 
   return (
-    <div>
-      <h1>MainMealsRecipes</h1>
-      <SearchBar />
+    <>
+      <Header />
       <div className="meals-recipes-container">
         {recipes.map(({ idMeal, strMeal, strMealThumb }) => (
           <RecipeCard
@@ -23,7 +23,8 @@ function MainMealsRecipes() {
           />
         ))}
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 
