@@ -5,8 +5,12 @@ import { useLocation } from 'react-router';
 
 import '../styles/RecipeCard.css';
 
-function RecipeCard({ id, image, index, title }) {
+function RecipeCard({ index, recipe }) {
   const { pathname } = useLocation();
+
+  const id = pathname === '/comidas' ? recipe.idMeal : recipe.idDrink;
+  const image = pathname === '/comidas' ? recipe.strMealThumb : recipe.strDrinkThumb;
+  const title = pathname === '/comidas' ? recipe.strMeal : recipe.strDrink;
 
   return (
     <Link
@@ -26,10 +30,8 @@ function RecipeCard({ id, image, index, title }) {
 }
 
 RecipeCard.propTypes = {
-  id: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
+  recipe: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default RecipeCard;
