@@ -8,20 +8,25 @@ import RecipesContext from '../../context/RecipesContext';
 import './MainCocktailsRecipes.css';
 
 function MainCocktailsRecipes() {
-  const { recipes } = useContext(RecipesContext);
+  const { cocktailsRecipes } = useContext(RecipesContext);
+
+  const MAX_RECIPES = 12;
 
   return (
     <>
       <Header />
       <div className="cocktails-recipes-container">
-        {recipes.map(({ idDrink, strDrink, strDrinkThumb }) => (
-          <RecipeCard
-            key={ idDrink }
-            id={ idDrink }
-            title={ strDrink }
-            image={ strDrinkThumb }
-          />
-        ))}
+        {cocktailsRecipes
+          .slice(0, MAX_RECIPES)
+          .map(({ idDrink, strDrink, strDrinkThumb }, index) => (
+            <RecipeCard
+              key={ idDrink }
+              id={ idDrink }
+              image={ strDrinkThumb }
+              index={ index }
+              title={ strDrink }
+            />
+          ))}
       </div>
       <Footer />
     </>

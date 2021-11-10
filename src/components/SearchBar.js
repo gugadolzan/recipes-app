@@ -11,17 +11,19 @@ const SEARCH_RADIO_OPTIONS = [
   {
     id: 'ingredient',
     label: 'Ingrediente',
-  }, {
+  },
+  {
     id: 'name',
     label: 'Nome',
-  }, {
+  },
+  {
     id: 'first-letter',
     label: 'Primeira letra',
   },
 ];
 
 function SearchBar() {
-  const { setRecipes } = useContext(RecipesContext);
+  const { setCocktailsRecipes, setMealsRecipes } = useContext(RecipesContext);
 
   const history = useHistory();
 
@@ -53,7 +55,9 @@ function SearchBar() {
       );
     }
 
-    setRecipes(response[key]);
+    return pathname === '/comidas'
+      ? setMealsRecipes(response[key])
+      : setCocktailsRecipes(response[key]);
   };
 
   const handleSubmit = (e) => {
@@ -61,17 +65,17 @@ function SearchBar() {
 
     switch (searchRadio) {
     case 'ingredient':
-      fetchData(`/filter.php?i=${searchInput}`);
+      fetchData(`filter.php?i=${searchInput}`);
       break;
     case 'name':
-      fetchData(`/search.php?s=${searchInput}`);
+      fetchData(`search.php?s=${searchInput}`);
       break;
     case 'first-letter':
       if (searchInput.length > 1) {
         return global.alert('Sua busca deve conter somente 1 (um) caracter');
         // alert when search input is more than 1 character
       }
-      fetchData(`/search.php?f=${searchInput}`);
+      fetchData(`search.php?f=${searchInput}`);
       break;
     default:
       break;
