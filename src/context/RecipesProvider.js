@@ -10,14 +10,14 @@ const { drinks, meals } = data;
 
 function RecipesProvider({ children }) {
   const [mealsRecipes, setMealsRecipes] = useState(meals);
-  const [cocktailsRecipes, setCocktailsRecipes] = useState(drinks);
+  const [drinksRecipes, setDrinksRecipes] = useState(drinks);
   const [loading, setLoading] = useState(false);
 
   const value = {
-    cocktailsRecipes,
+    drinksRecipes,
     mealsRecipes,
     loading,
-    setCocktailsRecipes,
+    setDrinksRecipes,
     setLoading,
     setMealsRecipes,
   };
