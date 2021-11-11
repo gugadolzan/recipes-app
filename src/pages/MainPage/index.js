@@ -9,12 +9,17 @@ import methods from '../../services/api';
 
 import './MainPage.css';
 
-const { filterByCategory, listAllCategories } = methods;
+const { filterByCategory, listAllCategories, searchBy } = methods;
 const MAX_CATEGORIES = 5;
 const MAX_RECIPES = 12;
 
 function MainPage() {
-  const { drinksRecipes, mealsRecipes } = useContext(RecipesContext);
+  const {
+    drinksRecipes,
+    mealsRecipes,
+    setDrinksRecipes,
+    setMealsRecipes,
+  } = useContext(RecipesContext);
   const { pathname } = useLocation();
   const [categories, setCategories] = useState([]);
   const [filter, setFilter] = useState('');
@@ -24,6 +29,15 @@ function MainPage() {
     ? ['idMeal', 'meals', mealsRecipes.slice(0, MAX_RECIPES)]
     : ['idDrink', 'drinks', drinksRecipes.slice(0, MAX_RECIPES)];
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const drinks = await searchBy.name('drinks');
+      const meals = await searchBy.name('meals');
+      setDrinksRecipes(drinks.drinks);
+      setMealsRecipes(meals.meals);
+    };
+    fetchData();
+  }, []);
   useEffect(() => {
     const fetchCategories = async () => {
       const response = await listAllCategories(pathKey);

@@ -3,14 +3,11 @@ import PropTypes from 'prop-types';
 
 import RecipesContext from './RecipesContext';
 
-import data from '../services/data';
-
 const { Provider } = RecipesContext;
-const { drinks, meals } = data;
 
 function RecipesProvider({ children }) {
-  const [mealsRecipes, setMealsRecipes] = useState(meals);
-  const [drinksRecipes, setDrinksRecipes] = useState(drinks);
+  const [mealsRecipes, setMealsRecipes] = useState([]);
+  const [drinksRecipes, setDrinksRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const value = {
