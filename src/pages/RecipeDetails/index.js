@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router';
 import PropTypes from 'prop-types';
-import IngredientsListDetails from './IngredientsListDetails';
+import { useLocation } from 'react-router';
 // import { Link } from 'react-router-dom';
-// import { useLocation } from 'react-router';
-// import RecipesContext from '../../context/RecipesContext';
 
 import methods from '../../services/api';
-
-import './RecipeDetails.css';
-// import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import shareIcon from '../../images/shareIcon.svg';
-// import { useHistory } from 'react-router';
+
+import './RecipeDetails.css';
 
 const { lookupDetails } = methods;
 
@@ -36,12 +32,15 @@ function RecipeDetails({ match: { params } }) {
   }, [params.id, recipeType]);
 
   const { strCategory, strInstructions, strYoutube } = recipe;
-  // const whatever = Object.entries(recipe).filter((curr) => curr.includes('strIngredient' || 'strMeasure')).map((curr) => )
-  // console.log(whatever);
 
-  function handleShare() {
-    setHidden(true);
-  }
+  const recipeIngredients = Object.entries(recipe)
+    .filter((curr) => curr[0].includes('strIngredient') && curr[1]);
+  const ingredientsMeasures = Object.entries(recipe)
+    .filter((curr) => curr[0].includes('strMeasure') && curr[1]);
+
+  // function handleShare() {
+  //   setHidden(true);
+  // }
 
   // function srcLiked() {
   //   if (!localStorage.getItem('favoriteRecipes')) return whiteHeartIcon;
@@ -50,12 +49,6 @@ function RecipeDetails({ match: { params } }) {
   //       .getItem('favoriteRecipes'))
   //     .some((item) => item.id === obj.id) ? blackHeartIcon : whiteHeartIcon;
   // };
-
-  // const ingredients = [];
-  // Object.keys(mockTest).forEach((key) => {
-  //   if (key.includes('strIngredient')) ingredients.push(mockTest[key]);
-  //   // console.log(ingredients);
-  // });
 
   return (
     <div className="recipe-details">
@@ -68,9 +61,13 @@ function RecipeDetails({ match: { params } }) {
       <h2 data-testid="recipe-title">{ recipe[title] }</h2>
       <h4 data-testid="recipe-category">{ strCategory }</h4>
 
-      {/* <IngredientsListDetails ingredients={ ingredients } measures={ measures } /> */}
-      <h3 data-testid="instructions">Instruções</h3>
+      {recipeIngredients.map((ingredient, index) => (
+        <p key={ ingredient[1] }>
+          {`- ${ingredient[1]} - ${ingredientsMeasures[index][1]}`}
+        </p>
+      ))}
 
+      <h3 data-testid="instructions">Instruções</h3>
       <p>{strInstructions}</p>
       <iframe
         data-testid="video"
