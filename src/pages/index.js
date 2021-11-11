@@ -1,7 +1,6 @@
 import Login from './Login';
 import MainPage from './MainPage';
-import MealRecipeDetails from './MealRecipeDetails';
-import CocktailRecipeDetails from './CocktailRecipeDetails';
+import RecipeDetails from './RecipeDetails';
 import InProgressFoodRecipe from './InProgressFoodRecipe';
 import InProgressDrinkRecipe from './InProgressDrinkRecipe';
 import Explore from './Explore';
@@ -18,8 +17,7 @@ import NotFound from './NotFound';
 export {
   Login,
   MainPage,
-  MealRecipeDetails,
-  CocktailRecipeDetails,
+  RecipeDetails,
   InProgressFoodRecipe,
   InProgressDrinkRecipe,
   Explore,

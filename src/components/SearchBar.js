@@ -24,7 +24,7 @@ const SEARCH_RADIO_OPTIONS = [
 ];
 
 function SearchBar() {
-  const { setCocktailsRecipes, setMealsRecipes } = useContext(RecipesContext);
+  const { setDrinksRecipes, setMealsRecipes } = useContext(RecipesContext);
   const history = useHistory();
   const [searchInput, setSearchInput] = useState('');
   const [searchRadio, setSearchRadio] = useState('');
@@ -32,7 +32,7 @@ function SearchBar() {
   const { pathname } = history.location;
   const [recipeType, setRecipes] = pathname === '/comidas'
     ? ['meals', setMealsRecipes]
-    : ['drinks', setCocktailsRecipes];
+    : ['drinks', setDrinksRecipes];
 
   const redirectToDetails = (id) => {
     history.push(`${pathname}/${id}`);

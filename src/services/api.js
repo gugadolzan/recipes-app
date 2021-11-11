@@ -21,6 +21,7 @@ const api = {
 const methods = {
   filterByCategory: (key, category) => api[key](`filter.php?c=${category}`),
   listAllCategories: (key) => api[key]('list.php?c=list'),
+  lookupDetails: (key, id) => api[key](`lookup.php?i=${id}`),
   searchBy: {
     ingredient: (key, ingredient) => api[key](`filter.php?i=${ingredient}`),
     name: (key, name) => api[key](`search.php?s=${name || ''}`),
