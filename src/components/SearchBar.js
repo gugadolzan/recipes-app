@@ -2,43 +2,44 @@ import React, { useContext, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 
 import RecipesContext from '../context/RecipesContext';
-import api from '../services/api';
+import methods from '../services/api';
 import SearchRadio from './SearchRadio';
 
 import '../styles/SearchBar.css';
 
+const { searchBy } = methods;
 const SEARCH_RADIO_OPTIONS = [
   {
     id: 'ingredient',
     label: 'Ingrediente',
-  }, {
+  },
+  {
     id: 'name',
     label: 'Nome',
-  }, {
+  },
+  {
     id: 'first-letter',
     label: 'Primeira letra',
   },
 ];
 
 function SearchBar() {
-  const { setRecipes } = useContext(RecipesContext);
-
+  const { setCocktailsRecipes, setMealsRecipes } = useContext(RecipesContext);
   const history = useHistory();
-
   const { pathname } = useLocation();
-
   const [searchInput, setSearchInput] = useState('');
   const [searchRadio, setSearchRadio] = useState('');
+
+  const [recipeType, setRecipes] = pathname === '/comidas'
+    ? ['meals', setMealsRecipes]
+    : ['drinks', setCocktailsRecipes];
 
   const redirectToDetails = (id) => {
     history.push(`${pathname}/${id}`);
   };
 
-  const fetchData = async (endpoint) => {
-    const response = pathname === '/comidas'
-      ? await api.mealDB(endpoint)
-      : await api.cocktailDB(endpoint);
-
+  const fetchData = async (type) => {
+    const response = await searchBy[type](recipeType, searchInput);
     const key = Object.keys(response);
 
     if (!response[key]) {
@@ -53,7 +54,7 @@ function SearchBar() {
       );
     }
 
-    setRecipes(response[key]);
+    return setRecipes(response[key]);
   };
 
   const handleSubmit = (e) => {
@@ -61,17 +62,17 @@ function SearchBar() {
 
     switch (searchRadio) {
     case 'ingredient':
-      fetchData(`/filter.php?i=${searchInput}`);
+      fetchData('ingredient');
       break;
     case 'name':
-      fetchData(`/search.php?s=${searchInput}`);
+      fetchData('name');
       break;
     case 'first-letter':
       if (searchInput.length > 1) {
         return global.alert('Sua busca deve conter somente 1 (um) caracter');
         // alert when search input is more than 1 character
       }
-      fetchData(`/search.php?f=${searchInput}`);
+      fetchData('firstLetter');
       break;
     default:
       break;
