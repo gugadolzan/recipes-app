@@ -8,7 +8,7 @@ import '../styles/RecipeCard.css';
 function RecipeCard({ index, recipe }) {
   const { pathname } = useLocation();
 
-  const [id, image, title] = pathname === '/comidas'
+  const [id, image, title] = pathname.includes('/comidas')
     ? [recipe.idMeal, recipe.strMealThumb, recipe.strMeal]
     : [recipe.idDrink, recipe.strDrinkThumb, recipe.strDrink];
 

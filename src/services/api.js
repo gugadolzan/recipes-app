@@ -19,7 +19,9 @@ const api = {
 };
 
 const methods = {
+  filterByArea: (area) => api.meals(`filter.php?a=${area}`),
   filterByCategory: (key, category) => api[key](`filter.php?c=${category}`),
+  listAllAreas: () => api.meals('list.php?a=list'),
   listAllCategories: (key) => api[key]('list.php?c=list'),
   lookupDetails: (key, id) => api[key](`lookup.php?i=${id}`),
   searchBy: {
