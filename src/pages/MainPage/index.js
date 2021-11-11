@@ -25,22 +25,23 @@ function MainPage() {
   const [filter, setFilter] = useState('');
   const [filteredRecipes, setFilteredRecipes] = useState([]);
 
-  const [id, pathKey, recipes] = pathname === '/comidas'
+  const [id, recipeType, recipes] = pathname === '/comidas'
     ? ['idMeal', 'meals', mealsRecipes.slice(0, MAX_RECIPES)]
     : ['idDrink', 'drinks', drinksRecipes.slice(0, MAX_RECIPES)];
 
   useEffect(() => {
     const fetchData = async () => {
-      const drinks = await searchBy.name('drinks');
-      const meals = await searchBy.name('meals');
-      setDrinksRecipes(drinks.drinks);
-      setMealsRecipes(meals.meals);
+      const { drinks } = await searchBy.name('drinks');
+      const { meals } = await searchBy.name('meals');
+      setDrinksRecipes((prevState) => (prevState.length === 0 ? drinks : prevState));
+      setMealsRecipes((prevState) => (prevState.length === 0 ? meals : prevState));
     };
     fetchData();
-  }, []);
+  }, [setDrinksRecipes, setMealsRecipes]);
+
   useEffect(() => {
     const fetchCategories = async () => {
-      const response = await listAllCategories(pathKey);
+      const response = await listAllCategories(recipeType);
       const key = Object.keys(response);
       const keyCategories = response[key]
         .map((category) => category.strCategory)
@@ -50,11 +51,11 @@ function MainPage() {
     };
 
     fetchCategories();
-  }, [pathKey, pathname]);
+  }, [recipeType, pathname]);
 
   const handleCategoryClick = async (category) => {
     if (filteredRecipes.length === 0 || filter !== category) {
-      const response = await filterByCategory(pathKey, category);
+      const response = await filterByCategory(recipeType, category);
       const recipeKey = Object.keys(response);
 
       setFilter(category);
