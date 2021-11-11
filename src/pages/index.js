@@ -1,6 +1,5 @@
 import Login from './Login';
-import MainMealsRecipes from './MainMealsRecipes';
-import MainCocktailsRecipes from './MainCocktailsRecipes';
+import MainPage from './MainPage';
 import MealRecipeDetails from './MealRecipeDetails';
 import CocktailRecipeDetails from './CocktailRecipeDetails';
 import InProgressFoodRecipe from './InProgressFoodRecipe';
@@ -18,8 +17,7 @@ import NotFound from './NotFound';
 
 export {
   Login,
-  MainMealsRecipes,
-  MainCocktailsRecipes,
+  MainPage,
   MealRecipeDetails,
   CocktailRecipeDetails,
   InProgressFoodRecipe,
