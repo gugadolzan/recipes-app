@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
+import IngredientsListDetails from './IngredientsListDetails';
 // import { Link } from 'react-router-dom';
 // import { useLocation } from 'react-router';
 // import RecipesContext from '../../context/RecipesContext';
@@ -8,9 +9,10 @@ import './MealRecipeDetails.css';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import shareIcon from '../../images/shareIcon.svg';
+// import { useHistory } from 'react-router';
 
-function MealRecipeDetails() {
-  // const { recepies } = useContext(RecipesContext);
+function MealRecipeDetails({ match }) {
+  // const  = useLocation()
 
   const [hidden, setHidden] = useState(false);
 
@@ -98,12 +100,7 @@ function MealRecipeDetails() {
           <img className="recepie-details-image" data-testid="recipe-photo" alt={ strMeal } src={ strMealThumb } />
           <h2 data-testid="recipe-title">{ strMeal }</h2>
           <h4 data-testid="recipe-category">{ strCategory }</h4>
-          <h3>Ingredientes</h3>
-          <div>
-            { ingredients.map((ingredient, index) => (
-              <li key={ index }>{ ingredient }</li>
-            ))}
-          </div>
+          <IngredientsListDetails ingredients={ ingredients } />
           <h3 data-testid="instructions">Instruções</h3>
           <p>{strInstructions}</p>
           <iframe
@@ -113,7 +110,7 @@ function MealRecipeDetails() {
           >
             { strYoutube }
           </iframe>
-          <h3 data-testid="${index}-recomendation-card">Recomendação</h3>
+          {/* <h3 data-testid={ `${index}-recomendation-card"` }>Recomendação</h3> */}
           <input
             alt="share"
             data-testid="share-btn"
@@ -133,7 +130,7 @@ function MealRecipeDetails() {
             // onClick={redireciona para tela de in progress}
             type="button"
           >
-            Continuar Receita
+            Iniciar Receita
           </button>
           { hidden ? <span>Link Copiado</span> : null }
         </div>
