@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import methods from '../../services/api';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
@@ -10,7 +10,9 @@ import shareIcon from '../../images/shareIcon.svg';
 
 import './RecipeDetails.css';
 
-const { lookupDetails } = methods;
+const { lookupDetails, searchBy } = methods;
+
+const MAX_RECOMENDATIONS = 6;
 
 function RecipeDetails({ match: { params } }) {
   const { pathname } = useLocation();
@@ -18,9 +20,13 @@ function RecipeDetails({ match: { params } }) {
   const [id, recipeType, thumb, title] = pathname.includes('/comidas')
     ? ['idMeal', 'meals', 'strMealThumb', 'strMeal']
     : ['idDrink', 'drinks', 'strDrinkThumb', 'strDrink'];
+  const [reverseId, reverseRecipeType, reverseThumb, reverseTitle, reversePath] = recipeType === 'meals'
+    ? ['idDrink', 'drinks', 'strDrinkThumb', 'strDrink', 'bebidas']
+    : ['idMeal', 'meals', 'strMealThumb', 'strMeal', 'comidas'];
 
   const [hidden, setHidden] = useState(false);
   const [recipe, setRecipe] = useState({});
+  const [recomendations, setRecomendations] = useState([]);
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -30,6 +36,14 @@ function RecipeDetails({ match: { params } }) {
 
     fetchRecipe();
   }, [params.id, recipeType]);
+  useEffect(() => {
+    const fetchRecomendations = async () => {
+      const response = await searchBy.name(reverseRecipeType);
+      setRecomendations(response[reverseRecipeType]);
+    };
+
+    fetchRecomendations();
+  }, [reverseRecipeType]);
 
   const { strCategory, strInstructions, strYoutube } = recipe;
 
@@ -58,23 +72,33 @@ function RecipeDetails({ match: { params } }) {
         data-testid="recipe-photo"
         src={ recipe[thumb] }
       />
+
       <h2 data-testid="recipe-title">{ recipe[title] }</h2>
-      <h4 data-testid="recipe-category">{ strCategory }</h4>
+
+      <h4 data-testid="recipe-category">
+        { pathname.includes('/comidas') ? strCategory : recipe.strAlcoholic }
+      </h4>
 
       {recipeIngredients.map((ingredient, index) => (
-        <p key={ ingredient[1] }>
-          {`- ${ingredient[1]} - ${ingredientsMeasures[index][1]}`}
+        <p data-testid={ `${index}-ingredient-name-and-measure` } key={ ingredient[1] }>
+          <span>{`- ${ingredient[1]}`}</span>
+          { ingredientsMeasures[index] && (
+            <span>{` - ${ingredientsMeasures[index][1]}`}</span>
+          ) }
         </p>
       ))}
 
       <h3 data-testid="instructions">Instruções</h3>
-      <p>{strInstructions}</p>
-      <iframe
-        data-testid="video"
-        title="How to"
-      >
-        { strYoutube }
-      </iframe>
+      <h3 data-testid="instructions">{strInstructions}</h3>
+
+      {/* set loading */}
+      {strYoutube && (
+        <iframe
+          data-testid="video"
+          title="How to"
+          src={ strYoutube.replace('watch?v=', 'embed/') }
+        />
+      )}
       <input
         alt="share"
         data-testid="share-btn"
@@ -89,6 +113,27 @@ function RecipeDetails({ match: { params } }) {
         src={ whiteHeartIcon }
         type="image"
       />
+
+      <h3>Recomendações</h3>
+      <div className="recomendations-container">
+        { recomendations.slice(0, MAX_RECOMENDATIONS).map((recomendation, index) => (
+          <Link
+            className="recipe-card"
+            data-testid={ `${index}-recomendation-card` }
+            key={ recomendation[reverseId] }
+            to={ `/${reversePath}/${recomendation[reverseId]}` }
+          >
+            <img
+              alt={ recomendation[reverseTitle] }
+              className="recipe-card-image"
+              data-testid={ `${index}-card-img` }
+              src={ recomendation[reverseThumb] }
+            />
+            <h3 data-testid={ `${index}-recomendation-title` }>{recomendation[reverseTitle]}</h3>
+          </Link>
+        )) }
+      </div>
+
       <button
         data-testid="start-recipe-btn"
         // onClick={redireciona para tela de in progress}

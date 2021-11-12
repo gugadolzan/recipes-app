@@ -13,9 +13,9 @@ const fetchData = async (api) => {
 
 const api = {
   meals: (endpoint) => fetchData(`${MEAL_API_URL}${endpoint}`),
-  // Reference: <https://www.themealdb.com/api.php>
+  // Reference: https://www.themealdb.com/api.php
   drinks: (endpoint) => fetchData(`${COCKTAIL_API_URL}${endpoint}`),
-  // Reference: <https://www.thecocktaildb.com/api.php>
+  // Reference: https://www.thecocktaildb.com/api.php
 };
 
 const methods = {
@@ -27,7 +27,7 @@ const methods = {
   searchBy: {
     ingredient: (key, ingredient) => api[key](`filter.php?i=${ingredient}`),
     name: (key, name) => api[key](`search.php?s=${name || ''}`),
-    // fetch initial recipes from www.themealdb.com/api/json/v1/1/search.php?s=
+    // fetch initial recipes and recomendations from www.themealdb.com/api/json/v1/1/search.php?s=
     firstLetter: (key, letter) => api[key](`search.php?f=${letter}`),
   },
 };
