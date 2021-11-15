@@ -4,7 +4,7 @@ import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 
 import methods from '../../services/api';
-import blackHeartIcon from '../../images/blackHeartIcon.svg';
+// import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import shareIcon from '../../images/shareIcon.svg';
 
@@ -20,7 +20,13 @@ function RecipeDetails({ match: { params } }) {
   const [id, recipeType, thumb, title] = pathname.includes('/comidas')
     ? ['idMeal', 'meals', 'strMealThumb', 'strMeal']
     : ['idDrink', 'drinks', 'strDrinkThumb', 'strDrink'];
-  const [reverseId, reverseRecipeType, reverseThumb, reverseTitle, reversePath] = recipeType === 'meals'
+  const [
+    reverseId,
+    reverseRecipeType,
+    reverseThumb,
+    reverseTitle,
+    reversePath,
+  ] = recipeType === 'meals'
     ? ['idDrink', 'drinks', 'strDrinkThumb', 'strDrink', 'bebidas']
     : ['idMeal', 'meals', 'strMealThumb', 'strMeal', 'comidas'];
 
@@ -47,10 +53,12 @@ function RecipeDetails({ match: { params } }) {
 
   const { strCategory, strInstructions, strYoutube } = recipe;
 
-  const recipeIngredients = Object.entries(recipe)
-    .filter((curr) => curr[0].includes('strIngredient') && curr[1]);
-  const ingredientsMeasures = Object.entries(recipe)
-    .filter((curr) => curr[0].includes('strMeasure') && curr[1]);
+  const recipeIngredients = Object.entries(recipe).filter(
+    (curr) => curr[0].includes('strIngredient') && curr[1],
+  );
+  const ingredientsMeasures = Object.entries(recipe).filter(
+    (curr) => curr[0].includes('strMeasure') && curr[1],
+  );
 
   // function handleShare() {
   //   setHidden(true);
@@ -73,18 +81,21 @@ function RecipeDetails({ match: { params } }) {
         src={ recipe[thumb] }
       />
 
-      <h2 data-testid="recipe-title">{ recipe[title] }</h2>
+      <h2 data-testid="recipe-title">{recipe[title]}</h2>
 
       <h4 data-testid="recipe-category">
-        { pathname.includes('/comidas') ? strCategory : recipe.strAlcoholic }
+        {pathname.includes('/comidas') ? strCategory : recipe.strAlcoholic}
       </h4>
 
       {recipeIngredients.map((ingredient, index) => (
-        <p data-testid={ `${index}-ingredient-name-and-measure` } key={ ingredient[1] }>
+        <p
+          data-testid={ `${index}-ingredient-name-and-measure` }
+          key={ ingredient[1] }
+        >
           <span>{`- ${ingredient[1]}`}</span>
-          { ingredientsMeasures[index] && (
+          {ingredientsMeasures[index] && (
             <span>{` - ${ingredientsMeasures[index][1]}`}</span>
-          ) }
+          )}
         </p>
       ))}
 
@@ -106,7 +117,7 @@ function RecipeDetails({ match: { params } }) {
         src={ shareIcon }
         type="image"
       />
-      { hidden && <span>Link Copiado</span> }
+      {hidden && <span>Link Copiado</span>}
       <input
         alt="favorite"
         data-testid="favorite-btn"
@@ -116,22 +127,26 @@ function RecipeDetails({ match: { params } }) {
 
       <h3>Recomendações</h3>
       <div className="recomendations-container">
-        { recomendations.slice(0, MAX_RECOMENDATIONS).map((recomendation, index) => (
-          <Link
-            className="recipe-card"
-            data-testid={ `${index}-recomendation-card` }
-            key={ recomendation[reverseId] }
-            to={ `/${reversePath}/${recomendation[reverseId]}` }
-          >
-            <img
-              alt={ recomendation[reverseTitle] }
-              className="recipe-card-image"
-              data-testid={ `${index}-card-img` }
-              src={ recomendation[reverseThumb] }
-            />
-            <h3 data-testid={ `${index}-recomendation-title` }>{recomendation[reverseTitle]}</h3>
-          </Link>
-        )) }
+        {recomendations
+          .slice(0, MAX_RECOMENDATIONS)
+          .map((recomendation, index) => (
+            <Link
+              className="recipe-card"
+              data-testid={ `${index}-recomendation-card` }
+              key={ recomendation[reverseId] }
+              to={ `/${reversePath}/${recomendation[reverseId]}` }
+            >
+              <img
+                alt={ recomendation[reverseTitle] }
+                className="recipe-card-image"
+                data-testid={ `${index}-card-img` }
+                src={ recomendation[reverseThumb] }
+              />
+              <h3 data-testid={ `${index}-recomendation-title` }>
+                {recomendation[reverseTitle]}
+              </h3>
+            </Link>
+          ))}
       </div>
 
       <button

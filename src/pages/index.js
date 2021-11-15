@@ -1,13 +1,10 @@
 import Login from './Login';
 import MainPage from './MainPage';
 import RecipeDetails from './RecipeDetails';
-import InProgressFoodRecipe from './InProgressFoodRecipe';
-import InProgressDrinkRecipe from './InProgressDrinkRecipe';
+import InProgressRecipe from './InProgressRecipe';
 import Explore from './Explore';
-import ExploreMeals from './ExploreMeals';
-import ExploreCocktails from './ExploreCocktails';
-import ExploreMealsByIngredient from './ExploreMealsByIngredient';
-import ExploreCocktailsByIngredient from './ExploreCocktailsByIngredient';
+import ExploreRecipes from './ExploreRecipes';
+import ExploreByIngredient from './ExploreByIngredient';
 import ExploreMealsByArea from './ExploreMealsByArea';
 import Profile from './Profile';
 import DoneRecipes from './DoneRecipes';
@@ -18,13 +15,10 @@ export {
   Login,
   MainPage,
   RecipeDetails,
-  InProgressFoodRecipe,
-  InProgressDrinkRecipe,
+  InProgressRecipe,
   Explore,
-  ExploreMeals,
-  ExploreCocktails,
-  ExploreMealsByIngredient,
-  ExploreCocktailsByIngredient,
+  ExploreRecipes,
+  ExploreByIngredient,
   ExploreMealsByArea,
   Profile,
   DoneRecipes,

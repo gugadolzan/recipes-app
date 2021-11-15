@@ -7,13 +7,10 @@ import RecipesContext from '../../context/RecipesContext';
 
 import methods from '../../services/api';
 
+const { listAllAreas, filterByArea } = methods;
+
 function ExploreMealsByArea() {
   const { mealsRecipes } = useContext(RecipesContext);
-  const context = useContext(RecipesContext);
-  console.log(mealsRecipes);
-  console.log(context);
-
-  const { listAllAreas, filterByArea } = methods;
 
   const [areas, setAreas] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
@@ -21,9 +18,9 @@ function ExploreMealsByArea() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await listAllAreas();
-      const key = Object.keys(response);
-      const keyAreas = response[key].map((origin) => origin.strArea);
-      setAreas(keyAreas);
+      const areaList = response.meals.map(({ strArea }) => strArea);
+      setAreas(areaList);
+      // setAreas((prevState) => (prevState.length === 0 ? areaList : prevState));
     };
     fetchData();
   }, []);
@@ -49,13 +46,11 @@ function ExploreMealsByArea() {
           onChange={ (e) => handleChange(e.target.value) }
           data-testid="explore-by-area-dropdown"
         >
-          <option value="All" data-testid="all-option">All</option>
+          <option value="All" data-testid="all-option">
+            All
+          </option>
           {areas.map((area) => (
-            <option
-              data-testid={ `${area}-option` }
-              key={ area }
-              value={ area }
-            >
+            <option data-testid={ `${area}-option` } key={ area } value={ area }>
               {area}
             </option>
           ))}

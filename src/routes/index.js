@@ -4,13 +4,10 @@ import {
   Login,
   MainPage,
   RecipeDetails,
-  InProgressFoodRecipe,
-  InProgressDrinkRecipe,
+  InProgressRecipe,
   Explore,
-  ExploreMeals,
-  ExploreCocktails,
-  ExploreMealsByIngredient,
-  ExploreCocktailsByIngredient,
+  ExploreRecipes,
+  ExploreByIngredient,
   ExploreMealsByArea,
   Profile,
   DoneRecipes,
@@ -26,26 +23,20 @@ function Routes() {
       <Route exact path="/bebidas" component={ MainPage } />
       <Route exact path="/comidas/:id" component={ RecipeDetails } />
       <Route exact path="/bebidas/:id" component={ RecipeDetails } />
-      <Route path="/comidas/:id/in-progress" component={ InProgressFoodRecipe } />
-      <Route
-        path="/bebidas/:id/in-progress"
-        component={ InProgressDrinkRecipe }
-      />
+      <Route path="/comidas/:id/in-progress" component={ InProgressRecipe } />
+      <Route path="/bebidas/:id/in-progress" component={ InProgressRecipe } />
       <Route exact path="/explorar" component={ Explore } />
-      <Route exact path="/explorar/comidas" component={ ExploreMeals } />
-      <Route exact path="/explorar/bebidas" component={ ExploreCocktails } />
+      <Route exact path="/explorar/comidas" component={ ExploreRecipes } />
+      <Route exact path="/explorar/bebidas" component={ ExploreRecipes } />
       <Route
         path="/explorar/comidas/ingredientes"
-        component={ ExploreMealsByIngredient }
+        component={ ExploreByIngredient }
       />
       <Route
         path="/explorar/bebidas/ingredientes"
-        component={ ExploreCocktailsByIngredient }
+        component={ ExploreByIngredient }
       />
-      <Route
-        path="/explorar/comidas/area"
-        component={ ExploreMealsByArea }
-      />
+      <Route path="/explorar/comidas/area" component={ ExploreMealsByArea } />
       <Route path="/perfil" component={ Profile } />
       <Route path="/receitas-feitas" component={ DoneRecipes } />
       <Route path="/receitas-favoritas" component={ FavoriteRecipes } />

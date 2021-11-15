@@ -3,7 +3,7 @@ import React from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
-function ExploreMealsByIngredient() {
+function ExploreByIngredient() {
   return (
     <>
       <Header />
@@ -12,4 +12,4 @@ function ExploreMealsByIngredient() {
   );
 }
 
-export default ExploreMealsByIngredient;
+export default ExploreByIngredient;
