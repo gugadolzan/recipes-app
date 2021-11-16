@@ -14,60 +14,61 @@ const MAX_CATEGORIES = 5;
 const MAX_RECIPES = 12;
 
 function MainPage() {
-  const {
-    drinksRecipes,
-    mealsRecipes,
-    setDrinksRecipes,
-    setMealsRecipes,
-  } = useContext(RecipesContext);
+  const { recipes, setRecipes, loading, setLoading } = useContext(RecipesContext);
   const { pathname } = useLocation();
   const [categories, setCategories] = useState([]);
-  const [filter, setFilter] = useState('');
-  const [filteredRecipes, setFilteredRecipes] = useState([]);
+  const [filter, setFilter] = useState('All');
 
-  const [id, recipeType, recipes] = pathname === '/comidas'
-    ? ['idMeal', 'meals', mealsRecipes.slice(0, MAX_RECIPES)]
-    : ['idDrink', 'drinks', drinksRecipes.slice(0, MAX_RECIPES)];
+  const [id, recipeType] = pathname === '/comidas'
+    ? ['idMeal', 'meals']
+    : ['idDrink', 'drinks'];
 
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
-      const { drinks } = await searchBy.name('drinks');
-      const { meals } = await searchBy.name('meals');
-      setDrinksRecipes((prevState) => (prevState.length === 0 ? drinks : prevState));
-      setMealsRecipes((prevState) => (prevState.length === 0 ? meals : prevState));
+      const response = await searchBy.name(recipeType);
+      setRecipes(response[recipeType]);
+      setLoading(false);
     };
     fetchData();
-  }, [setDrinksRecipes, setMealsRecipes]);
+  }, [recipeType, setLoading, setRecipes]);
 
   useEffect(() => {
     const fetchCategories = async () => {
       const response = await listAll.categories(recipeType);
-      const key = Object.keys(response);
-      const keyCategories = response[key]
-        .map((category) => category.strCategory)
+      const categoryKeys = response[recipeType]
+        .map(({ strCategory }) => strCategory)
         .slice(0, MAX_CATEGORIES);
-
-      setCategories(keyCategories);
+      setCategories(['All', ...categoryKeys]);
     };
-
     fetchCategories();
-  }, [recipeType, pathname]);
+  }, [recipeType]);
 
   const handleCategoryClick = async (category) => {
-    if (filteredRecipes.length === 0 || filter !== category) {
-      const response = await filterBy.category(recipeType, category);
-      const recipeKey = Object.keys(response);
+    let response;
+    setLoading(true);
 
+    if (category !== filter && category !== 'All') {
       setFilter(category);
-      setFilteredRecipes(response[recipeKey].slice(0, MAX_RECIPES));
+      response = await filterBy.category(recipeType, category);
     } else {
-      setFilteredRecipes([]);
+      setFilter('All');
+      response = await searchBy.name(recipeType);
     }
+
+    setRecipes(response[recipeType]);
+    setLoading(false);
   };
 
-  const renderRecipeCard = (recipe, index) => (
-    <RecipeCard index={ index } key={ recipe[id] } recipe={ recipe } />
-  );
+  if (loading) {
+    return (
+      <>
+        <Header />
+        <div>Carregando...</div>
+        <Footer />
+      </>
+    );
+  }
 
   return (
     <>
@@ -86,9 +87,9 @@ function MainPage() {
         ))}
       </div>
       <div className="meals-recipes-container">
-        {filteredRecipes.length === 0
-          ? recipes.map((recipe, index) => renderRecipeCard(recipe, index))
-          : filteredRecipes.map((recipe, index) => renderRecipeCard(recipe, index))}
+        {recipes.slice(0, MAX_RECIPES).map((recipe, index) => (
+          <RecipeCard index={ index } key={ recipe[id] } recipe={ recipe } />
+        ))}
       </div>
       <Footer />
     </>

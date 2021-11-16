@@ -8,15 +8,18 @@ const { Provider } = RecipesContext;
 function RecipesProvider({ children }) {
   const [mealsRecipes, setMealsRecipes] = useState([]);
   const [drinksRecipes, setDrinksRecipes] = useState([]);
+  const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const value = {
     drinksRecipes,
-    mealsRecipes,
     loading,
+    mealsRecipes,
+    recipes,
     setDrinksRecipes,
     setLoading,
     setMealsRecipes,
+    setRecipes,
   };
 
   return <Provider value={ value }>{children}</Provider>;
