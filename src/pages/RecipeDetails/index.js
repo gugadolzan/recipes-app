@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import copy from 'clipboard-copy';
 
 import methods from '../../services/api';
-// import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import shareIcon from '../../images/shareIcon.svg';
 
@@ -37,6 +37,10 @@ function RecipeDetails({ match: { params } }) {
       pathname.includes('/comidas') ? 'meals' : 'cocktails'
     ] // sometimes the key is 'drinks' and sometimes 'cocktails'... :clown:
     : {};
+  const favoriteRecipesStorage = JSON.parse(
+    localStorage.getItem('favoriteRecipes'),
+  );
+  const favoriteRecipes = favoriteRecipesStorage || [];
 
   // fetch recipe details
   useEffect(() => {
@@ -64,11 +68,6 @@ function RecipeDetails({ match: { params } }) {
     (curr) => curr[0].includes('strMeasure') && curr[1],
   );
 
-  const copyToClipboard = () => {
-    setShowCopyToClipboard(true);
-    copy(window.location.href);
-  };
-
   if (loading) {
     return <div>Carregando...</div>;
   }
@@ -88,7 +87,10 @@ function RecipeDetails({ match: { params } }) {
       <input
         alt="share"
         data-testid="share-btn"
-        onClick={ copyToClipboard }
+        onClick={ () => {
+          setShowCopyToClipboard(true);
+          copy(window.location.href);
+        } }
         src={ shareIcon }
         type="image"
       />
@@ -96,7 +98,11 @@ function RecipeDetails({ match: { params } }) {
       <input
         alt="favorite"
         data-testid="favorite-btn"
-        src={ whiteHeartIcon }
+        src={
+          favoriteRecipes.some((curr) => curr.id === recipe[params.id])
+            ? blackHeartIcon
+            : whiteHeartIcon
+        }
         type="image"
       />
 
