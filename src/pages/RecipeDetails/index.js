@@ -10,31 +10,17 @@ import shareIcon from '../../images/shareIcon.svg';
 
 import RecipeHeader from './RecipeHeader';
 import RecipeIngredients from './RecipeIngredients';
+import Recomendations from './Recomendations';
 
 import './RecipeDetails.css';
 
 const { lookup, searchBy } = methods;
-const MAX_RECOMENDATIONS = 6;
-const RECIPE_KEYS = {
-  meals: {
-    path: 'comidas',
-    recipeId: 'idMeal',
-    thumb: 'strMealThumb',
-    title: 'strMeal',
-  },
-  drinks: {
-    path: 'bebidas',
-    recipeId: 'idDrink',
-    thumb: 'strDrinkThumb',
-    title: 'strDrink',
-  },
-};
 
 function RecipeDetails({ match: { params } }) {
   const { pathname } = useLocation();
-  const [recipeType, reverseType] = pathname.includes('/comidas')
-    ? ['meals', 'drinks']
-    : ['drinks', 'meals'];
+  const [recipeType, reverseType, thumb, title] = pathname.includes('/comidas')
+    ? ['meals', 'drinks', 'strMealThumb', 'strMeal']
+    : ['drinks', 'meals', 'strDrinkThumb', 'strDrink'];
 
   const [hidden, setHidden] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -43,6 +29,7 @@ function RecipeDetails({ match: { params } }) {
 
   // fetch recipe details
   useEffect(() => {
+    setLoading(true);
     const fetchRecipe = async () => {
       const response = await lookup.details(recipeType, params.id);
       setRecipe(response[recipeType][0]);
@@ -78,8 +65,8 @@ function RecipeDetails({ match: { params } }) {
             ? recipe.strCategory
             : recipe.strAlcoholic
         }
-        image={ recipe[RECIPE_KEYS[recipeType].thumb] }
-        title={ recipe[RECIPE_KEYS[recipeType].title] }
+        image={ recipe[thumb] }
+        title={ recipe[title] }
       />
 
       <input
@@ -101,9 +88,10 @@ function RecipeDetails({ match: { params } }) {
         ingredients={ recipeIngredients }
         measures={ ingredientsMeasures }
       />
+
       <h2 data-testid="instructions">Instructions</h2>
       <p data-testid="instructions">{recipe.strInstructions}</p>
-      {pathname.includes('/comidas') && (
+      {pathname.includes('/comidas') && recipe.strYoutube && (
         <iframe
           data-testid="video"
           title="How to"
@@ -111,31 +99,7 @@ function RecipeDetails({ match: { params } }) {
         />
       )}
 
-      <h3>Recomendations</h3>
-      <div className="recomendations-container">
-        {recomendations
-          .slice(0, MAX_RECOMENDATIONS)
-          .map((recomendation, index) => (
-            <Link
-              className="recipe-card"
-              data-testid={ `${index}-recomendation-card` }
-              key={ recomendation[RECIPE_KEYS[reverseType].recipeId] }
-              to={ `/${RECIPE_KEYS[reverseType].recipeId}/${
-                recomendation[RECIPE_KEYS[reverseType].recipeId]
-              }` }
-            >
-              <img
-                alt={ recomendation[RECIPE_KEYS[reverseType].title] }
-                className="recipe-card-image"
-                data-testid={ `${index}-card-img` }
-                src={ recomendation[RECIPE_KEYS[reverseType].thumb] }
-              />
-              <h3 data-testid={ `${index}-recomendation-title` }>
-                {recomendation[RECIPE_KEYS[reverseType].title]}
-              </h3>
-            </Link>
-          ))}
-      </div>
+      <Recomendations recomendations={ recomendations } />
 
       <button
         data-testid="start-recipe-btn"
