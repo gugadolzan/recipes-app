@@ -28,6 +28,10 @@ function RecipeDetails({ match: { params } }) {
   const [recipe, setRecipe] = useState({});
   const [recomendations, setRecomendations] = useState([]);
 
+  const { [recipeType]: inProgressRecipes } = JSON.parse(
+    localStorage.getItem('inProgressRecipes'),
+  );
+
   // fetch recipe details
   useEffect(() => {
     setLoading(true);
@@ -57,9 +61,6 @@ function RecipeDetails({ match: { params } }) {
   if (loading) {
     return <div>Carregando...</div>;
   }
-
-  // const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  // console.log(inProgressRecipes);
 
   return (
     <div className="recipe-details">
@@ -110,7 +111,7 @@ function RecipeDetails({ match: { params } }) {
         data-testid="start-recipe-btn"
         to={ `${pathname}/in-progress` }
       >
-        Iniciar Receita
+        {inProgressRecipes[params.id] ? 'Continuar Receita' : 'Iniciar Receita'}
       </Link>
     </div>
   );
