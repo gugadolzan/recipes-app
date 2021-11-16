@@ -1,10 +1,18 @@
-/* .recipe-details-card {
-  align-items: center;
-  border: 0.1rem solid black;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 1rem auto;
-  width: 10rem;
+/* .recipe-details {
+  margin-top: 0 !important;
 } */
+
+.start-recipe-btn {
+  background-color: white;
+  border: none;
+  bottom: 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  color: black;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 1rem 0;
+  position: fixed;
+  text-align: center;
+  transition: all 0.3s;
+  width: 100%;
+}

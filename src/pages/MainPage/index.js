@@ -35,7 +35,6 @@ function MainPage() {
   }, [recipeType, setRecipes]);
 
   useEffect(() => {
-    setLoading(true);
     const fetchCategories = async () => {
       const response = await listAll.categories(recipeType);
       const categoryKeys = response[recipeType]
@@ -56,7 +55,7 @@ function MainPage() {
       response = await searchBy.name(recipeType);
     }
 
-    setFilter(category);
+    setFilter((prevState) => (prevState === category ? 'All' : category));
     setRecipes(response[recipeType]);
     setLoading(false);
   };
@@ -65,22 +64,18 @@ function MainPage() {
     <>
       <Header title={ headerTitle } />
       <div className="category-filter-container">
-        {loading ? (
-          <div>Carregando...</div>
-        ) : (
-          categories.map((category) => (
-            <button
-              className="category-filter"
-              data-testid={ `${category}-category-filter` }
-              key={ category }
-              onClick={ ({ target }) => handleCategoryClick(target.innerText) }
-              type="button"
-              value={ category }
-            >
-              {category}
-            </button>
-          ))
-        )}
+        {categories.map((category) => (
+          <button
+            className="category-filter"
+            data-testid={ `${category}-category-filter` }
+            key={ category }
+            onClick={ ({ target }) => handleCategoryClick(target.innerText) }
+            type="button"
+            value={ category }
+          >
+            {category}
+          </button>
+        ))}
       </div>
       {loading ? (
         <div>Carregando...</div>

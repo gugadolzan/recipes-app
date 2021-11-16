@@ -22,7 +22,8 @@ function RecipeDetails({ match: { params } }) {
     ? ['meals', 'drinks', 'strMealThumb', 'strMeal']
     : ['drinks', 'meals', 'strDrinkThumb', 'strDrink'];
 
-  const [hidden, setHidden] = useState(false);
+  // const [hidden, setHidden] = useState(false);
+  const hidden = false;
   const [loading, setLoading] = useState(true);
   const [recipe, setRecipe] = useState({});
   const [recomendations, setRecomendations] = useState([]);
@@ -101,13 +102,13 @@ function RecipeDetails({ match: { params } }) {
 
       <Recomendations recomendations={ recomendations } />
 
-      <button
+      <Link
+        className="start-recipe-btn"
         data-testid="start-recipe-btn"
-        // onClick={redireciona para tela de in progress}
-        type="button"
+        to={ `${pathname}/in-progress` }
       >
         Iniciar Receita
-      </button>
+      </Link>
     </div>
   );
 }
