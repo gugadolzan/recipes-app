@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
+import copy from 'clipboard-copy';
 
 import methods from '../../services/api';
 // import blackHeartIcon from '../../images/blackHeartIcon.svg';
@@ -22,8 +23,7 @@ function RecipeDetails({ match: { params } }) {
     ? ['meals', 'drinks', 'strMealThumb', 'strMeal']
     : ['drinks', 'meals', 'strDrinkThumb', 'strDrink'];
 
-  // const [hidden, setHidden] = useState(false);
-  const hidden = false;
+  const [showCopyToClipboard, setShowCopyToClipboard] = useState(false);
   const [loading, setLoading] = useState(true);
   const [recipe, setRecipe] = useState({});
   const [recomendations, setRecomendations] = useState([]);
@@ -33,7 +33,9 @@ function RecipeDetails({ match: { params } }) {
   );
   // necessary to avoid cypress tests to fail
   const inProgressRecipes = inProgressRecipesStorage
-    ? inProgressRecipesStorage[pathname.includes('/comidas') ? 'meals' : 'cocktails'] // sometimes the key is 'drinks' and sometimes 'cocktails'... :clown:
+    ? inProgressRecipesStorage[
+      pathname.includes('/comidas') ? 'meals' : 'cocktails'
+    ] // sometimes the key is 'drinks' and sometimes 'cocktails'... :clown:
     : {};
 
   // fetch recipe details
@@ -62,11 +64,15 @@ function RecipeDetails({ match: { params } }) {
     (curr) => curr[0].includes('strMeasure') && curr[1],
   );
 
+  const copyToClipboard = () => {
+    setShowCopyToClipboard(true);
+    copy(window.location.href);
+  };
+
   if (loading) {
     return <div>Carregando...</div>;
   }
 
-  console.log(inProgressRecipes);
   return (
     <div className="recipe-details">
       <RecipeHeader
@@ -82,11 +88,11 @@ function RecipeDetails({ match: { params } }) {
       <input
         alt="share"
         data-testid="share-btn"
-        // onClick={ handleShare }
+        onClick={ copyToClipboard }
         src={ shareIcon }
         type="image"
       />
-      {hidden && <span>Link Copiado</span>}
+      {showCopyToClipboard && <span>Link copiado!</span>}
       <input
         alt="favorite"
         data-testid="favorite-btn"
