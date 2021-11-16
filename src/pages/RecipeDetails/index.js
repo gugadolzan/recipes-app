@@ -28,9 +28,13 @@ function RecipeDetails({ match: { params } }) {
   const [recipe, setRecipe] = useState({});
   const [recomendations, setRecomendations] = useState([]);
 
-  const { [recipeType]: inProgressRecipes } = JSON.parse(
+  const inProgressRecipesStorage = JSON.parse(
     localStorage.getItem('inProgressRecipes'),
   );
+  // necessary to avoid cypress tests to fail
+  const inProgressRecipes = inProgressRecipesStorage
+    ? inProgressRecipesStorage[pathname.includes('/comidas') ? 'meals' : 'cocktails'] // sometimes the key is 'drinks' and sometimes 'cocktails'... :clown:
+    : {};
 
   // fetch recipe details
   useEffect(() => {
@@ -62,6 +66,7 @@ function RecipeDetails({ match: { params } }) {
     return <div>Carregando...</div>;
   }
 
+  console.log(inProgressRecipes);
   return (
     <div className="recipe-details">
       <RecipeHeader
