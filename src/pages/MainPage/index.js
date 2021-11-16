@@ -25,15 +25,17 @@ function MainPage() {
     : ['Bebidas', 'idDrink', 'drinks'];
 
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
       const response = await searchBy.name(recipeType);
       setRecipes(response[recipeType]);
       setLoading(false);
     };
     fetchData();
-  }, [recipeType, setLoading, setRecipes]);
+  }, [recipeType, setRecipes]);
 
   useEffect(() => {
+    setLoading(true);
     const fetchCategories = async () => {
       const response = await listAll.categories(recipeType);
       const categoryKeys = response[recipeType]
@@ -62,18 +64,23 @@ function MainPage() {
   return (
     <>
       <Header title={ headerTitle } />
-      <div>
-        {categories.map((category) => (
-          <button
-            data-testid={ `${category}-category-filter` }
-            key={ category }
-            onClick={ ({ target }) => handleCategoryClick(target.innerText) }
-            type="button"
-            value={ category }
-          >
-            {category}
-          </button>
-        ))}
+      <div className="category-filter-container">
+        {loading ? (
+          <div>Carregando...</div>
+        ) : (
+          categories.map((category) => (
+            <button
+              className="category-filter"
+              data-testid={ `${category}-category-filter` }
+              key={ category }
+              onClick={ ({ target }) => handleCategoryClick(target.innerText) }
+              type="button"
+              value={ category }
+            >
+              {category}
+            </button>
+          ))
+        )}
       </div>
       {loading ? (
         <div>Carregando...</div>

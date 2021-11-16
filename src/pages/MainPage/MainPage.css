@@ -3,3 +3,23 @@
   flex-flow: row wrap;
   justify-content: space-around;
 }
+
+.category-filter-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+
+.category-filter {
+  background-color: #f55a00;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+  color: white;
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  transition: all 0.3s;
+  width: 100px;
+}

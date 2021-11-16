@@ -1,8 +1,13 @@
 .header {
   align-items: center;
-  background-color: #ccc;
+  background-color: rgba(191, 80, 0, 1);
+  color: white;
   display: flex;
-  padding: 1rem;
+  padding: 1rem 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
 }
 
 .page-title {
@@ -14,7 +19,6 @@
 .profile-top-btn {
   left: 0.5rem;
   position: absolute;
-  top: 1rem;
 }
 
 .search-top-btn {
@@ -22,5 +26,4 @@
   border: none;
   position: absolute;
   right: 0.5rem;
-  top: 1rem;
 }
