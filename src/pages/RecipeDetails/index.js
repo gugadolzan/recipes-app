@@ -58,6 +58,9 @@ function RecipeDetails({ match: { params } }) {
     return <div>Carregando...</div>;
   }
 
+  // const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  // console.log(inProgressRecipes);
+
   return (
     <div className="recipe-details">
       <RecipeHeader

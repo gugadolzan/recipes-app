@@ -1,3 +1,5 @@
+// unusable (for now)
+
 // Reference: <https://github.com/tryber/sd-014-a-project-trivia-react-redux/pull/86>
 
 // storage: object that handles reading/writing data from/to localStorage

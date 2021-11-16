@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 
-import storage from '../../services/storage';
+import INITIAL_LOCAL_STORAGE from '../../data';
+
 import LoginInput from './LoginInput';
 
 import './Login.css';
@@ -12,11 +13,16 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  // set initial localStorage
+  useEffect(() => {
+    INITIAL_LOCAL_STORAGE.forEach(({ key, value }) => {
+      localStorage.setItem(key, JSON.stringify(value));
+    });
+  }, []);
+
   const handleCLick = async (e) => {
     e.preventDefault();
-    storage.write('mealsToken', 1);
-    storage.write('cocktailsToken', 1);
-    storage.write('user', { email });
+    localStorage.setItem('user', JSON.stringify({ email }));
     history.push('/comidas');
   };
 
