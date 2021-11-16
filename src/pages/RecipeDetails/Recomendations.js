@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 
+import './Recomendations.css';
+
 const MAX_RECOMENDATIONS = 6;
 
 export default function Recomendations({ recomendations }) {

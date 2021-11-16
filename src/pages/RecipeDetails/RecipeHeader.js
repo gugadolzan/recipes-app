@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './RecipeHeader.css';
+
 export default function RecipeHeader({ category, image, title }) {
   return (
     <>

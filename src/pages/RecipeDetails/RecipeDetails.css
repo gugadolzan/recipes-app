@@ -8,18 +8,3 @@
   margin: 1rem auto;
   width: 10rem;
 } */
-
-.recipe-photo {
-  height: 10rem;
-  width: 10rem;
-}
-
-.recomendations-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin: 1rem auto;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  width: 100%;
-}

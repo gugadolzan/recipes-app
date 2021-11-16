@@ -1,0 +1,4 @@
+.recomendations-container {
+  display: flex;
+  overflow-x: scroll;
+}
