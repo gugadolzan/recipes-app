@@ -19,9 +19,9 @@ function MainPage() {
   const [categories, setCategories] = useState([]);
   const [filter, setFilter] = useState('All');
 
-  const [recipeId, recipeType] = pathname === '/comidas'
-    ? ['idMeal', 'meals']
-    : ['idDrink', 'drinks'];
+  const [headerTitle, recipeId, recipeType] = pathname.includes('/comidas')
+    ? ['Comidas', 'idMeal', 'meals']
+    : ['Bebidas', 'idDrink', 'drinks'];
 
   useEffect(() => {
     setLoading(true);
@@ -71,7 +71,7 @@ function MainPage() {
 
   return (
     <>
-      <Header />
+      <Header title={ headerTitle } />
       <div>
         {categories.map((category) => (
           <button
@@ -85,7 +85,7 @@ function MainPage() {
           </button>
         ))}
       </div>
-      <div className="meals-recipes-container">
+      <div className="recipes-container">
         {recipes.slice(0, MAX_RECIPES).map((recipe, index) => (
           <RecipeCard index={ index } key={ recipe[recipeId] } recipe={ recipe } />
         ))}

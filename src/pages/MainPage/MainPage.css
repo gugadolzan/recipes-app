@@ -1,4 +1,4 @@
-.meals-recipes-container {
+.recipes-container {
   display: flex;
   flex-flow: row wrap;
 }

@@ -12,7 +12,7 @@ function Profile() {
 
   return (
     <>
-      <Header />
+      <Header title="Perfil" />
       <div className="profile-page">
         <h2 data-testid="profile-email">{email}</h2>
         <Link

@@ -7,7 +7,6 @@ function renderWithRouter(componentToRender) {
   const customHistory = createMemoryHistory();
 
   return {
-    /* retorno do render (getByRole, getByText...) */
     ...render(
       <Router history={ customHistory }>
         { componentToRender }

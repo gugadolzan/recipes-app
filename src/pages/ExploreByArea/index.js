@@ -52,7 +52,7 @@ function ExploreByArea() {
   if (loading) {
     return (
       <>
-        <Header />
+        <Header title="Explorar Origem" />
         <div>Carregando...</div>
         <Footer />
       </>
@@ -61,7 +61,7 @@ function ExploreByArea() {
 
   return (
     <>
-      <Header />
+      <Header title="Explorar Origem" />
       <select
         data-testid="explore-by-area-dropdown"
         onChange={ ({ target }) => handleAreaChange(target.value) }
