@@ -13,7 +13,7 @@ import RecipeIngredients from './RecipeIngredients';
 
 import './RecipeDetails.css';
 
-const { lookupDetails, searchBy } = methods;
+const { lookup, searchBy } = methods;
 const MAX_RECOMENDATIONS = 6;
 const RECIPE_KEYS = {
   meals: {
@@ -44,7 +44,7 @@ function RecipeDetails({ match: { params } }) {
   // fetch recipe details
   useEffect(() => {
     const fetchRecipe = async () => {
-      const response = await lookupDetails(recipeType, params.id);
+      const response = await lookup.details(recipeType, params.id);
       setRecipe(response[recipeType][0]);
       setLoading(false);
     };

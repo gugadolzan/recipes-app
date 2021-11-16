@@ -30,7 +30,10 @@ const methods = {
     categories: (key) => api[key]('list.php?c=list'),
   },
 
-  lookupDetails: (key, id) => api[key](`lookup.php?i=${id}`),
+  lookup: {
+    details: (key, id) => api[key](`lookup.php?i=${id}`),
+    random: (key) => api[key]('random.php'),
+  },
 
   searchBy: {
     ingredient: (key, ingredient) => api[key](`filter.php?i=${ingredient}`),
