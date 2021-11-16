@@ -8,50 +8,56 @@ import methods from '../../services/api';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import shareIcon from '../../images/shareIcon.svg';
 
+import RecipeHeader from './RecipeHeader';
+import RecipeIngredients from './RecipeIngredients';
+
 import './RecipeDetails.css';
 
 const { lookupDetails, searchBy } = methods;
-
 const MAX_RECOMENDATIONS = 6;
+const RECIPE_KEYS = {
+  meals: {
+    path: 'comidas',
+    recipeId: 'idMeal',
+    thumb: 'strMealThumb',
+    title: 'strMeal',
+  },
+  drinks: {
+    path: 'bebidas',
+    recipeId: 'idDrink',
+    thumb: 'strDrinkThumb',
+    title: 'strDrink',
+  },
+};
 
 function RecipeDetails({ match: { params } }) {
   const { pathname } = useLocation();
-
-  const [recipeId, recipeType, thumb, title] = pathname.includes('/comidas')
-    ? ['idMeal', 'meals', 'strMealThumb', 'strMeal']
-    : ['idDrink', 'drinks', 'strDrinkThumb', 'strDrink'];
-  const [
-    reverseId,
-    reverseRecipeType,
-    reverseThumb,
-    reverseTitle,
-    reversePath,
-  ] = recipeType === 'meals'
-    ? ['idDrink', 'drinks', 'strDrinkThumb', 'strDrink', 'bebidas']
-    : ['idMeal', 'meals', 'strMealThumb', 'strMeal', 'comidas'];
+  const [recipeType, reverseType] = pathname.includes('/comidas')
+    ? ['meals', 'drinks']
+    : ['drinks', 'meals'];
 
   const [hidden, setHidden] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [recipe, setRecipe] = useState({});
   const [recomendations, setRecomendations] = useState([]);
 
+  // fetch recipe details
   useEffect(() => {
     const fetchRecipe = async () => {
       const response = await lookupDetails(recipeType, params.id);
       setRecipe(response[recipeType][0]);
+      setLoading(false);
     };
-
     fetchRecipe();
   }, [params.id, recipeType]);
+  // fetch recomendations
   useEffect(() => {
     const fetchRecomendations = async () => {
-      const response = await searchBy.name(reverseRecipeType);
-      setRecomendations(response[reverseRecipeType]);
+      const response = await searchBy.name(reverseType);
+      setRecomendations(response[reverseType]);
     };
-
     fetchRecomendations();
-  }, [reverseRecipeType]);
-
-  const { strCategory, strInstructions, strYoutube } = recipe;
+  }, [reverseType]);
 
   const recipeIngredients = Object.entries(recipe).filter(
     (curr) => curr[0].includes('strIngredient') && curr[1],
@@ -60,56 +66,22 @@ function RecipeDetails({ match: { params } }) {
     (curr) => curr[0].includes('strMeasure') && curr[1],
   );
 
-  // function handleShare() {
-  //   setHidden(true);
-  // }
-
-  // function srcLiked() {
-  //   if (!localStorage.getItem('favoriteRecipes')) return whiteHeartIcon;
-  //   return JSON
-  //     .parse(localStorage
-  //       .getItem('favoriteRecipes'))
-  //     .some((item) => item.id === obj.id) ? blackHeartIcon : whiteHeartIcon;
-  // };
+  if (loading) {
+    return <div>Carregando...</div>;
+  }
 
   return (
     <div className="recipe-details">
-      <img
-        alt={ recipe[title] }
-        className="recipe-photo"
-        data-testid="recipe-photo"
-        src={ recipe[thumb] }
+      <RecipeHeader
+        category={
+          pathname.includes('/comidas')
+            ? recipe.strCategory
+            : recipe.strAlcoholic
+        }
+        image={ recipe[RECIPE_KEYS[recipeType].thumb] }
+        title={ recipe[RECIPE_KEYS[recipeType].title] }
       />
 
-      <h2 data-testid="recipe-title">{recipe[title]}</h2>
-
-      <h4 data-testid="recipe-category">
-        {pathname.includes('/comidas') ? strCategory : recipe.strAlcoholic}
-      </h4>
-
-      {recipeIngredients.map((ingredient, index) => (
-        <p
-          data-testid={ `${index}-ingredient-name-and-measure` }
-          key={ ingredient[1] }
-        >
-          <span>{`- ${ingredient[1]}`}</span>
-          {ingredientsMeasures[index] && (
-            <span>{` - ${ingredientsMeasures[index][1]}`}</span>
-          )}
-        </p>
-      ))}
-
-      <h3 data-testid="instructions">Instruções</h3>
-      <h3 data-testid="instructions">{strInstructions}</h3>
-
-      {/* set loading */}
-      {strYoutube && (
-        <iframe
-          data-testid="video"
-          title="How to"
-          src={ strYoutube.replace('watch?v=', 'embed/') }
-        />
-      )}
       <input
         alt="share"
         data-testid="share-btn"
@@ -125,7 +97,21 @@ function RecipeDetails({ match: { params } }) {
         type="image"
       />
 
-      <h3>Recomendações</h3>
+      <RecipeIngredients
+        ingredients={ recipeIngredients }
+        measures={ ingredientsMeasures }
+      />
+      <h2 data-testid="instructions">Instructions</h2>
+      <p data-testid="instructions">{recipe.strInstructions}</p>
+      {pathname.includes('/comidas') && (
+        <iframe
+          data-testid="video"
+          title="How to"
+          src={ recipe.strYoutube.replace('watch?v=', 'embed/') }
+        />
+      )}
+
+      <h3>Recomendations</h3>
       <div className="recomendations-container">
         {recomendations
           .slice(0, MAX_RECOMENDATIONS)
@@ -133,17 +119,19 @@ function RecipeDetails({ match: { params } }) {
             <Link
               className="recipe-card"
               data-testid={ `${index}-recomendation-card` }
-              key={ recomendation[reverseId] }
-              to={ `/${reversePath}/${recomendation[reverseId]}` }
+              key={ recomendation[RECIPE_KEYS[reverseType].recipeId] }
+              to={ `/${RECIPE_KEYS[reverseType].recipeId}/${
+                recomendation[RECIPE_KEYS[reverseType].recipeId]
+              }` }
             >
               <img
-                alt={ recomendation[reverseTitle] }
+                alt={ recomendation[RECIPE_KEYS[reverseType].title] }
                 className="recipe-card-image"
                 data-testid={ `${index}-card-img` }
-                src={ recomendation[reverseThumb] }
+                src={ recomendation[RECIPE_KEYS[reverseType].thumb] }
               />
               <h3 data-testid={ `${index}-recomendation-title` }>
-                {recomendation[reverseTitle]}
+                {recomendation[RECIPE_KEYS[reverseType].title]}
               </h3>
             </Link>
           ))}

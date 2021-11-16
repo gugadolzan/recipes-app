@@ -62,7 +62,7 @@ function MainPage() {
   if (loading) {
     return (
       <>
-        <Header />
+        <Header title={ headerTitle } />
         <div>Carregando...</div>
         <Footer />
       </>
