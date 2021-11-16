@@ -24,19 +24,15 @@ const SEARCH_RADIO_OPTIONS = [
 ];
 
 function SearchBar() {
-  const { setDrinksRecipes, setMealsRecipes } = useContext(RecipesContext);
+  const { setRecipes } = useContext(RecipesContext);
   const history = useHistory();
   const [searchInput, setSearchInput] = useState('');
   const [searchRadio, setSearchRadio] = useState('');
 
   const { pathname } = history.location;
-  const [recipeType, setRecipes] = pathname === '/comidas'
-    ? ['meals', setMealsRecipes]
-    : ['drinks', setDrinksRecipes];
-
-  const redirectToDetails = (id) => {
-    history.push(`${pathname}/${id}`);
-  };
+  const [recipeId, recipeType] = pathname === '/comidas'
+    ? ['idMeal', 'meals']
+    : ['idDrink', 'drinks'];
 
   const fetchData = async (type) => {
     const response = await searchBy[type](recipeType, searchInput);
@@ -48,9 +44,7 @@ function SearchBar() {
     }
 
     if (response[recipeType].length === 1) {
-      return redirectToDetails(
-        response[recipeType][0].idDrink || response[recipeType][0].idMeal,
-      );
+      return history.push(`${pathname}/${response[recipeType][0][recipeId]}`);
     }
 
     return setRecipes(response[recipeType]);

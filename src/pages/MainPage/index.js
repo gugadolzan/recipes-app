@@ -19,7 +19,7 @@ function MainPage() {
   const [categories, setCategories] = useState([]);
   const [filter, setFilter] = useState('All');
 
-  const [id, recipeType] = pathname === '/comidas'
+  const [recipeId, recipeType] = pathname === '/comidas'
     ? ['idMeal', 'meals']
     : ['idDrink', 'drinks'];
 
@@ -88,7 +88,7 @@ function MainPage() {
       </div>
       <div className="meals-recipes-container">
         {recipes.slice(0, MAX_RECIPES).map((recipe, index) => (
-          <RecipeCard index={ index } key={ recipe[id] } recipe={ recipe } />
+          <RecipeCard index={ index } key={ recipe[recipeId] } recipe={ recipe } />
         ))}
       </div>
       <Footer />

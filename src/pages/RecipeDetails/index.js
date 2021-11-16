@@ -17,7 +17,7 @@ const MAX_RECOMENDATIONS = 6;
 function RecipeDetails({ match: { params } }) {
   const { pathname } = useLocation();
 
-  const [id, recipeType, thumb, title] = pathname.includes('/comidas')
+  const [recipeId, recipeType, thumb, title] = pathname.includes('/comidas')
     ? ['idMeal', 'meals', 'strMealThumb', 'strMeal']
     : ['idDrink', 'drinks', 'strDrinkThumb', 'strDrink'];
   const [
