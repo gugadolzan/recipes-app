@@ -14,17 +14,17 @@ const MAX_CATEGORIES = 5;
 const MAX_RECIPES = 12;
 
 function MainPage() {
-  const { recipes, setRecipes, loading, setLoading } = useContext(RecipesContext);
+  const { recipes, setRecipes } = useContext(RecipesContext);
   const { pathname } = useLocation();
   const [categories, setCategories] = useState([]);
   const [filter, setFilter] = useState('All');
+  const [loading, setLoading] = useState(true);
 
   const [headerTitle, recipeId, recipeType] = pathname.includes('/comidas')
     ? ['Comidas', 'idMeal', 'meals']
     : ['Bebidas', 'idDrink', 'drinks'];
 
   useEffect(() => {
-    setLoading(true);
     const fetchData = async () => {
       const response = await searchBy.name(recipeType);
       setRecipes(response[recipeType]);
@@ -59,16 +59,6 @@ function MainPage() {
     setLoading(false);
   };
 
-  if (loading) {
-    return (
-      <>
-        <Header title={ headerTitle } />
-        <div>Carregando...</div>
-        <Footer />
-      </>
-    );
-  }
-
   return (
     <>
       <Header title={ headerTitle } />
@@ -85,11 +75,15 @@ function MainPage() {
           </button>
         ))}
       </div>
-      <div className="recipes-container">
-        {recipes.slice(0, MAX_RECIPES).map((recipe, index) => (
-          <RecipeCard index={ index } key={ recipe[recipeId] } recipe={ recipe } />
-        ))}
-      </div>
+      {loading ? (
+        <div>Carregando...</div>
+      ) : (
+        <div className="recipes-container">
+          {recipes.slice(0, MAX_RECIPES).map((recipe, index) => (
+            <RecipeCard index={ index } key={ recipe[recipeId] } recipe={ recipe } />
+          ))}
+        </div>
+      )}
       <Footer />
     </>
   );

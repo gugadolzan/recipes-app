@@ -11,12 +11,12 @@ const { filterBy, listAll, searchBy } = methods;
 const MAX_RECIPES = 12;
 
 function ExploreByArea() {
-  const { recipes, setRecipes, loading, setLoading } = useContext(RecipesContext);
+  const { recipes, setRecipes } = useContext(RecipesContext);
   const [areas, setAreas] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [selectedArea, setSelectedArea] = useState('All');
 
   useEffect(() => {
-    setLoading(true);
     const fetchData = async () => {
       const { meals } = await searchBy.name('meals');
       setRecipes((prevState) => (prevState.length === 0 ? meals : prevState));
@@ -49,16 +49,6 @@ function ExploreByArea() {
     setLoading(false);
   };
 
-  if (loading) {
-    return (
-      <>
-        <Header title="Explorar Origem" />
-        <div>Carregando...</div>
-        <Footer />
-      </>
-    );
-  }
-
   return (
     <>
       <Header title="Explorar Origem" />
@@ -73,9 +63,15 @@ function ExploreByArea() {
           </option>
         ))}
       </select>
-      {recipes.slice(0, MAX_RECIPES).map((recipe, index) => (
-        <RecipeCard index={ index } key={ recipe.idMeal } recipe={ recipe } />
-      ))}
+      {loading ? (
+        <div>Carregando...</div>
+      ) : (
+        recipes
+          .slice(0, MAX_RECIPES)
+          .map((recipe, index) => (
+            <RecipeCard index={ index } key={ recipe.idMeal } recipe={ recipe } />
+          ))
+      )}
       <Footer />
     </>
   );
