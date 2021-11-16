@@ -1,7 +1,7 @@
 import Login from './Login';
 import MainPage from './MainPage';
 import RecipeDetails from './RecipeDetails';
-import InProgressRecipe from './InProgressRecipe';
+import RecipeInProgress from './RecipeInProgress';
 import Explore from './Explore';
 import ExploreRecipes from './ExploreRecipes';
 import ExploreByIngredient from './ExploreByIngredient';
@@ -15,7 +15,7 @@ export {
   Login,
   MainPage,
   RecipeDetails,
-  InProgressRecipe,
+  RecipeInProgress,
   Explore,
   ExploreRecipes,
   ExploreByIngredient,
