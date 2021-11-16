@@ -9,7 +9,7 @@ import methods from '../../services/api';
 
 import './MainPage.css';
 
-const { filterByCategory, listAllCategories, searchBy } = methods;
+const { filterBy, listAll, searchBy } = methods;
 const MAX_CATEGORIES = 5;
 const MAX_RECIPES = 12;
 
@@ -41,7 +41,7 @@ function MainPage() {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const response = await listAllCategories(recipeType);
+      const response = await listAll.categories(recipeType);
       const key = Object.keys(response);
       const keyCategories = response[key]
         .map((category) => category.strCategory)
@@ -55,7 +55,7 @@ function MainPage() {
 
   const handleCategoryClick = async (category) => {
     if (filteredRecipes.length === 0 || filter !== category) {
-      const response = await filterByCategory(recipeType, category);
+      const response = await filterBy.category(recipeType, category);
       const recipeKey = Object.keys(response);
 
       setFilter(category);

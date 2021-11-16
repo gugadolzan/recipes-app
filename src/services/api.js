@@ -14,16 +14,24 @@ const fetchData = async (api) => {
 const api = {
   meals: (endpoint) => fetchData(`${MEAL_API_URL}${endpoint}`),
   // Reference: https://www.themealdb.com/api.php
+
   drinks: (endpoint) => fetchData(`${COCKTAIL_API_URL}${endpoint}`),
   // Reference: https://www.thecocktaildb.com/api.php
 };
 
 const methods = {
-  filterByArea: (area) => api.meals(`filter.php?a=${area}`),
-  filterByCategory: (key, category) => api[key](`filter.php?c=${category}`),
-  listAllAreas: () => api.meals('list.php?a=list'),
-  listAllCategories: (key) => api[key]('list.php?c=list'),
+  filterBy: {
+    area: (area) => api.meals(`filter.php?a=${area}`),
+    category: (key, category) => api[key](`filter.php?c=${category}`),
+  },
+
+  listAll: {
+    areas: () => api.meals('list.php?a=list'),
+    categories: (key) => api[key]('list.php?c=list'),
+  },
+
   lookupDetails: (key, id) => api[key](`lookup.php?i=${id}`),
+
   searchBy: {
     ingredient: (key, ingredient) => api[key](`filter.php?i=${ingredient}`),
     name: (key, name) => api[key](`search.php?s=${name || ''}`),

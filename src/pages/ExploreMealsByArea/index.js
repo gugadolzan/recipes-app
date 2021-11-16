@@ -7,7 +7,7 @@ import RecipesContext from '../../context/RecipesContext';
 
 import methods from '../../services/api';
 
-const { listAllAreas, filterByArea } = methods;
+const { listAll, filterBy } = methods;
 
 function ExploreMealsByArea() {
   const { mealsRecipes } = useContext(RecipesContext);
@@ -17,7 +17,7 @@ function ExploreMealsByArea() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await listAllAreas();
+      const response = await listAll.areas();
       const areaList = response.meals.map(({ strArea }) => strArea);
       setAreas(areaList);
       // setAreas((prevState) => (prevState.length === 0 ? areaList : prevState));
@@ -29,7 +29,7 @@ function ExploreMealsByArea() {
     if (area === 'All') {
       setFilteredRecipes([]);
     } else {
-      const response = await filterByArea(area);
+      const response = await filterBy.areas(area);
       setFilteredRecipes(response.meals);
     }
   };
