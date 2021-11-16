@@ -8,7 +8,7 @@ import {
   Explore,
   ExploreRecipes,
   ExploreByIngredient,
-  ExploreMealsByArea,
+  ExploreByArea,
   Profile,
   DoneRecipes,
   FavoriteRecipes,
@@ -36,7 +36,7 @@ function Routes() {
         path="/explorar/bebidas/ingredientes"
         component={ ExploreByIngredient }
       />
-      <Route path="/explorar/comidas/area" component={ ExploreMealsByArea } />
+      <Route path="/explorar/comidas/area" component={ ExploreByArea } />
       <Route path="/perfil" component={ Profile } />
       <Route path="/receitas-feitas" component={ DoneRecipes } />
       <Route path="/receitas-favoritas" component={ FavoriteRecipes } />

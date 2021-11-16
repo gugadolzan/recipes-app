@@ -49,13 +49,12 @@ function MainPage() {
     setLoading(true);
 
     if (category !== filter && category !== 'All') {
-      setFilter(category);
       response = await filterBy.category(recipeType, category);
     } else {
-      setFilter('All');
       response = await searchBy.name(recipeType);
     }
 
+    setFilter(category);
     setRecipes(response[recipeType]);
     setLoading(false);
   };

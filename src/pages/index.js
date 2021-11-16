@@ -5,7 +5,7 @@ import InProgressRecipe from './InProgressRecipe';
 import Explore from './Explore';
 import ExploreRecipes from './ExploreRecipes';
 import ExploreByIngredient from './ExploreByIngredient';
-import ExploreMealsByArea from './ExploreMealsByArea';
+import ExploreByArea from './ExploreByArea';
 import Profile from './Profile';
 import DoneRecipes from './DoneRecipes';
 import FavoriteRecipes from './FavoriteRecipes';
@@ -19,7 +19,7 @@ export {
   Explore,
   ExploreRecipes,
   ExploreByIngredient,
-  ExploreMealsByArea,
+  ExploreByArea,
   Profile,
   DoneRecipes,
   FavoriteRecipes,

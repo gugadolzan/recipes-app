@@ -8,23 +8,25 @@ import '../styles/RecipeCard.css';
 function RecipeCard({ index, recipe }) {
   const { pathname } = useLocation();
 
-  const [recipeId, image, title] = pathname.includes('/comidas')
-    ? [recipe.idMeal, recipe.strMealThumb, recipe.strMeal]
-    : [recipe.idDrink, recipe.strDrinkThumb, recipe.strDrink];
+  const [path, recipeId, recipeThumb, recipeTitle] = pathname.includes(
+    '/comidas',
+  )
+    ? ['/comidas', recipe.idMeal, recipe.strMealThumb, recipe.strMeal]
+    : ['/bebidas', recipe.idDrink, recipe.strDrinkThumb, recipe.strDrink];
 
   return (
     <Link
       className="recipe-card"
       data-testid={ `${index}-recipe-card` }
-      to={ `${pathname}/${recipeId}` }
+      to={ `${path}/${recipeId}` }
     >
       <img
-        alt={ title }
+        alt={ recipeTitle }
         className="recipe-card-image"
         data-testid={ `${index}-card-img` }
-        src={ image }
+        src={ recipeThumb }
       />
-      <h3 data-testid={ `${index}-card-name` }>{title}</h3>
+      <h3 data-testid={ `${index}-card-name` }>{recipeTitle}</h3>
     </Link>
   );
 }
