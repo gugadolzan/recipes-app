@@ -63,29 +63,31 @@ function MainPage() {
   return (
     <>
       <Header title={ headerTitle } />
-      <div className="category-filter-container">
-        {categories.map((category) => (
-          <button
-            className="category-filter"
-            data-testid={ `${category}-category-filter` }
-            key={ category }
-            onClick={ ({ target }) => handleCategoryClick(target.innerText) }
-            type="button"
-            value={ category }
-          >
-            {category}
-          </button>
-        ))}
-      </div>
-      {loading ? (
-        <div>Carregando...</div>
-      ) : (
-        <div className="recipes-container">
-          {recipes.slice(0, MAX_RECIPES).map((recipe, index) => (
-            <RecipeCard index={ index } key={ index } recipe={ recipe } />
+      <div className="header-padding-top main-background">
+        <div className="category-filter-container">
+          {categories.map((category) => (
+            <button
+              className="category-filter"
+              data-testid={ `${category}-category-filter` }
+              key={ category }
+              onClick={ ({ target }) => handleCategoryClick(target.innerText) }
+              type="button"
+              value={ category }
+            >
+              {category}
+            </button>
           ))}
         </div>
-      )}
+        {loading ? (
+          <div>Carregando...</div>
+        ) : (
+          <div className="recipes-container">
+            {recipes.slice(0, MAX_RECIPES).map((recipe, index) => (
+              <RecipeCard index={ index } key={ index } recipe={ recipe } />
+            ))}
+          </div>
+        )}
+      </div>
       <Footer />
     </>
   );

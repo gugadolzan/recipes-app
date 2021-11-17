@@ -1,14 +1,27 @@
 .recipe-card {
   align-items: center;
-  border: 0.1rem solid black;
+  background-color: #bf5000;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin: 0.5rem;
-  width: 150px;
+  margin: 0.5rem 0;
+  width: 160px;
 }
 
 .recipe-card-image {
-  width: 150px;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  height: 80px;
+  object-fit: cover;
+  width: 160px;
+}
+
+.recipe-card-title {
+  align-self: flex-start;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin: 0.5rem;
 }

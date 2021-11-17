@@ -1,13 +1,8 @@
-.recipes-container {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
-}
-
 .category-filter-container {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
+  margin: 0.5rem 0;
 }
 
 .category-filter {
@@ -18,8 +13,14 @@
   color: white;
   cursor: pointer;
   font-size: 0.8rem;
-  margin: 0.5rem;
+  margin: 0.2rem;
   padding: 0.5rem;
   transition: all 0.3s;
-  width: 100px;
+  width: 110px;
+}
+
+.recipes-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
 }

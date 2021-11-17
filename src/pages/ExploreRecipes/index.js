@@ -31,7 +31,7 @@ function ExploreRecipes() {
   return (
     <>
       <Header title={ headerTitle } />
-      <div className="explore-recipes-links">
+      <div className="header-padding-top explore-recipes-links">
         <button
           type="button"
           data-testid="explore-by-ingredient"

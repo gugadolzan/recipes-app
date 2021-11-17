@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 export default function LoginInput({ name, onChange, value }) {
   return (
     <input
+      className="login-input"
       data-testid={ `${name}-input` }
       id={ name }
       name={ name }

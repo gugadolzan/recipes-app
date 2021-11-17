@@ -10,7 +10,7 @@ function Explore() {
   return (
     <>
       <Header title="Explorar" />
-      <div className="explore-links">
+      <div className="header-padding-top explore-links">
         <Link data-testid="explore-food" to="/explorar/comidas">
           Explorar Comidas
         </Link>

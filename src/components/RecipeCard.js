@@ -26,7 +26,9 @@ function RecipeCard({ index, recipe }) {
         data-testid={ `${index}-card-img` }
         src={ recipeThumb }
       />
-      <h3 data-testid={ `${index}-card-name` }>{recipeTitle}</h3>
+      <h3 className="recipe-card-title" data-testid={ `${index}-card-name` }>
+        {recipeTitle}
+      </h3>
     </Link>
   );
 }

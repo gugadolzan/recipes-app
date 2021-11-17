@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 
 import INITIAL_LOCAL_STORAGE from '../../data';
-
 import LoginInput from './LoginInput';
 
+import logo from '../../images/logo.png';
 import './Login.css';
 
 function Login() {
@@ -32,25 +32,29 @@ function Login() {
   };
 
   return (
-    <form className="login-form" onSubmit={ handleCLick }>
-      <LoginInput
-        name="email"
-        onChange={ ({ target }) => setEmail(target.value) }
-        value={ email }
-      />
-      <LoginInput
-        name="password"
-        onChange={ ({ target }) => setPassword(target.value) }
-        value={ password }
-      />
-      <button
-        data-testid="login-submit-btn"
-        disabled={ !validateEmail() || !validatePassword() }
-        type="submit"
-      >
-        Login
-      </button>
-    </form>
+    <div className="main-background">
+      <img alt="logo" className="logo" src={ logo } />
+      <form className="login-form" onSubmit={ handleCLick }>
+        <LoginInput
+          name="email"
+          onChange={ ({ target }) => setEmail(target.value) }
+          value={ email }
+        />
+        <LoginInput
+          name="password"
+          onChange={ ({ target }) => setPassword(target.value) }
+          value={ password }
+        />
+        <button
+          className="login-button"
+          data-testid="login-submit-btn"
+          disabled={ !validateEmail() || !validatePassword() }
+          type="submit"
+        >
+          Entrar
+        </button>
+      </form>
+    </div>
   );
 }
 

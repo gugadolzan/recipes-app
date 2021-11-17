@@ -13,7 +13,7 @@ function Profile() {
   return (
     <>
       <Header title="Perfil" />
-      <div className="profile-page">
+      <div className="header-padding-top profile-page">
         <h2 data-testid="profile-email">{email}</h2>
         <Link
           className="profile-btn"
