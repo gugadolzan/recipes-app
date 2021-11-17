@@ -7,7 +7,7 @@ import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import shareIcon from '../../images/shareIcon.svg';
 
 export default function ShareAndFavorite({ recipe }) {
-  // const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
   const [showCopyToClipboard, setShowCopyToClipboard] = useState(false);
 
   // const favoriteRecipesStorage = JSON.parse(
@@ -40,12 +40,12 @@ export default function ShareAndFavorite({ recipe }) {
       <input
         alt="Favorite button"
         data-testid="favorite-btn"
-        // src={
-        //   favoriteRecipes.some((curr) => curr.id === recipe[params.id])
-        //     ? blackHeartIcon
-        //     : whiteHeartIcon
-        // }
-        src={ whiteHeartIcon }
+        src={
+          // favoriteRecipes.some((curr) => curr.id === recipe[params.id])
+          //   ? blackHeartIcon
+          //   : whiteHeartIcon
+          isFavorite ? blackHeartIcon : whiteHeartIcon
+        }
         type="image"
       />
     </>

@@ -1,6 +1,6 @@
-/* .recipe-details {
-  margin-top: 0 !important;
-} */
+.recipe-details {
+  padding-bottom: 60px;
+}
 
 .recipe-photo {
   height: 10rem;
