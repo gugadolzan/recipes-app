@@ -18,15 +18,15 @@ function RecipeCard({ dataTestid, index, recipe, titleTestid }) {
       data-testid={ `${index}-${dataTestid}` }
       to={ `${id.includes('Meal') ? '/comidas' : '/bebidas'}/${recipe[id]}` }
     >
+      <h3 className="recipe-card-title" data-testid={ `${index}-${titleTestid}` }>
+        {recipe[title]}
+      </h3>
       <img
         alt={ recipe[title] }
         className="recipe-card-image"
         data-testid={ `${index}-card-img` }
         src={ recipe[image] }
       />
-      <h3 className="recipe-card-title" data-testid={ `${index}-${titleTestid}` }>
-        {recipe[title]}
-      </h3>
     </Link>
   );
 }

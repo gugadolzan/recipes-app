@@ -7,22 +7,50 @@ import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import shareIcon from '../../images/shareIcon.svg';
 
 export default function ShareAndFavorite({ recipe }) {
+  const [id, image, name, type] = Object.keys(recipe)[0].includes('Meal')
+    ? ['idMeal', 'strMealThumb', 'strMeal', 'comida']
+    : ['idDrink', 'strDrinkThumb', 'strDrink', 'bebida'];
+
   const [isFavorite, setIsFavorite] = useState(false);
   const [showCopyToClipboard, setShowCopyToClipboard] = useState(false);
 
-  // const favoriteRecipesStorage = JSON.parse(
-  //   localStorage.getItem('favoriteRecipes'),
-  // );
-  // const favoriteRecipes = favoriteRecipesStorage || [];
+  const favoriteRecipesStorage = JSON.parse(
+    localStorage.getItem('favoriteRecipes'),
+  );
+  const favoriteRecipes = favoriteRecipesStorage || [];
+  const isItFavorite = favoriteRecipes.some((curr) => curr.id === recipe[id]);
 
-  // useEffect(() => {
-  //   const recipeId = Object.keys(recipe)[0];
-  //   const isFavoriteRecipe = favoriteRecipes.some(
-  //     (curr) => curr.id === recipe[recipeId],
-  //   );
-  //   setIsFavorite(isFavoriteRecipe);
-  //   // console.log(favoriteRecipesStorage, favoriteRecipes, isFavoriteRecipe);
-  // }, []);
+  useEffect(() => {
+    setIsFavorite(isItFavorite);
+  }, [isItFavorite]);
+
+  const handleFavorite = () => {
+    const { strAlcoholic, strArea, strCategory } = recipe;
+
+    const favoriteRecipe = {
+      id: recipe[id],
+      type,
+      area: strArea || '',
+      category: strCategory || '',
+      alcoholicOrNot: strAlcoholic || '',
+      name: recipe[name],
+      image: recipe[image],
+    };
+
+    let newFavoriteRecipes;
+
+    if (isFavorite) {
+      newFavoriteRecipes = favoriteRecipes.filter(
+        (curr) => curr.id !== favoriteRecipe.id,
+      );
+      setIsFavorite(false);
+    } else {
+      newFavoriteRecipes = [...favoriteRecipes, favoriteRecipe];
+      setIsFavorite(true);
+    }
+
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
+  };
 
   return (
     <>
@@ -40,12 +68,8 @@ export default function ShareAndFavorite({ recipe }) {
       <input
         alt="Favorite button"
         data-testid="favorite-btn"
-        src={
-          // favoriteRecipes.some((curr) => curr.id === recipe[params.id])
-          //   ? blackHeartIcon
-          //   : whiteHeartIcon
-          isFavorite ? blackHeartIcon : whiteHeartIcon
-        }
+        onClick={ handleFavorite }
+        src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
         type="image"
       />
     </>
