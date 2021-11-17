@@ -9,7 +9,7 @@ export default function RecipeIngredients({ ingredients, measures }) {
         {ingredients.map((ingredient, index) => (
           <li
             data-testid={ `${index}-ingredient-name-and-measure` }
-            key={ ingredient[1] }
+            key={ index }
           >
             <span>{ingredient[1]}</span>
             {measures[index] && <span>{` - ${measures[index][1]}`}</span>}

@@ -20,9 +20,9 @@ function MainPage() {
   const [filter, setFilter] = useState('All');
   const [loading, setLoading] = useState(true);
 
-  const [headerTitle, recipeId, recipeType] = pathname.includes('/comidas')
-    ? ['Comidas', 'idMeal', 'meals']
-    : ['Bebidas', 'idDrink', 'drinks'];
+  const [headerTitle, recipeType] = pathname.includes('/comidas')
+    ? ['Comidas', 'meals']
+    : ['Bebidas', 'drinks'];
 
   useEffect(() => {
     setLoading(true);
@@ -82,7 +82,7 @@ function MainPage() {
       ) : (
         <div className="recipes-container">
           {recipes.slice(0, MAX_RECIPES).map((recipe, index) => (
-            <RecipeCard index={ index } key={ recipe[recipeId] } recipe={ recipe } />
+            <RecipeCard index={ index } key={ index } recipe={ recipe } />
           ))}
         </div>
       )}

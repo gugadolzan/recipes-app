@@ -22,7 +22,7 @@ export default function Recomendations({ recomendations }) {
             <Link
               className="recipe-card"
               data-testid={ `${index}-recomendation-card` }
-              key={ recomendation[recipeId] }
+              key={ index }
               to={ `/${path}/${recomendation[recipeId]}` }
             >
               <img

@@ -2,6 +2,11 @@
   margin-top: 0 !important;
 } */
 
+.recipe-photo {
+  height: 10rem;
+  width: 10rem;
+}
+
 .start-recipe-btn {
   background-color: white;
   border: none;

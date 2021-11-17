@@ -69,7 +69,7 @@ function ExploreByArea() {
         recipes
           .slice(0, MAX_RECIPES)
           .map((recipe, index) => (
-            <RecipeCard index={ index } key={ recipe.idMeal } recipe={ recipe } />
+            <RecipeCard index={ index } key={ index } recipe={ recipe } />
           ))
       )}
       <Footer />
