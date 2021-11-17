@@ -9,85 +9,84 @@ import methods from '../../services/api';
 
 import './MainPage.css';
 
-const { filterByCategory, listAllCategories, searchBy } = methods;
+const { filterBy, listAll, searchBy } = methods;
 const MAX_CATEGORIES = 5;
 const MAX_RECIPES = 12;
 
 function MainPage() {
-  const {
-    drinksRecipes,
-    mealsRecipes,
-    setDrinksRecipes,
-    setMealsRecipes,
-  } = useContext(RecipesContext);
+  const { recipes, setRecipes } = useContext(RecipesContext);
   const { pathname } = useLocation();
   const [categories, setCategories] = useState([]);
-  const [filter, setFilter] = useState('');
-  const [filteredRecipes, setFilteredRecipes] = useState([]);
+  const [filter, setFilter] = useState('All');
+  const [loading, setLoading] = useState(true);
 
-  const [id, pathKey, recipes] = pathname === '/comidas'
-    ? ['idMeal', 'meals', mealsRecipes.slice(0, MAX_RECIPES)]
-    : ['idDrink', 'drinks', drinksRecipes.slice(0, MAX_RECIPES)];
+  const [headerTitle, recipeType] = pathname.includes('/comidas')
+    ? ['Comidas', 'meals']
+    : ['Bebidas', 'drinks'];
 
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
-      const drinks = await searchBy.name('drinks');
-      const meals = await searchBy.name('meals');
-      setDrinksRecipes(drinks.drinks);
-      setMealsRecipes(meals.meals);
+      const response = await searchBy.name(recipeType);
+      setRecipes(response[recipeType]);
+      setLoading(false);
     };
     fetchData();
-  }, []);
+  }, [recipeType, setRecipes]);
+
   useEffect(() => {
     const fetchCategories = async () => {
-      const response = await listAllCategories(pathKey);
-      const key = Object.keys(response);
-      const keyCategories = response[key]
-        .map((category) => category.strCategory)
+      const response = await listAll.categories(recipeType);
+      const categoryKeys = response[recipeType]
+        .map(({ strCategory }) => strCategory)
         .slice(0, MAX_CATEGORIES);
-
-      setCategories(keyCategories);
+      setCategories(['All', ...categoryKeys]);
     };
-
     fetchCategories();
-  }, [pathKey, pathname]);
+  }, [recipeType]);
 
   const handleCategoryClick = async (category) => {
-    if (filteredRecipes.length === 0 || filter !== category) {
-      const response = await filterByCategory(pathKey, category);
-      const recipeKey = Object.keys(response);
+    let response;
+    setLoading(true);
 
-      setFilter(category);
-      setFilteredRecipes(response[recipeKey].slice(0, MAX_RECIPES));
+    if (category !== filter && category !== 'All') {
+      response = await filterBy.category(recipeType, category);
     } else {
-      setFilteredRecipes([]);
+      response = await searchBy.name(recipeType);
     }
-  };
 
-  const renderRecipeCard = (recipe, index) => (
-    <RecipeCard index={ index } key={ recipe[id] } recipe={ recipe } />
-  );
+    setFilter((prevState) => (prevState === category ? 'All' : category));
+    setRecipes(response[recipeType]);
+    setLoading(false);
+  };
 
   return (
     <>
-      <Header />
-      <div>
-        {categories.map((category) => (
-          <button
-            data-testid={ `${category}-category-filter` }
-            key={ category }
-            onClick={ ({ target }) => handleCategoryClick(target.innerText) }
-            type="button"
-            value={ category }
-          >
-            {category}
-          </button>
-        ))}
-      </div>
-      <div className="meals-recipes-container">
-        {filteredRecipes.length === 0
-          ? recipes.map((recipe, index) => renderRecipeCard(recipe, index))
-          : filteredRecipes.map((recipe, index) => renderRecipeCard(recipe, index))}
+      <Header title={ headerTitle } />
+      <div className="header-padding-top main-background">
+        <div className="category-filter-container">
+          {categories.map((category) => (
+            <button
+              className="category-filter"
+              data-testid={ `${category}-category-filter` }
+              key={ category }
+              onClick={ ({ target }) => handleCategoryClick(target.innerText) }
+              type="button"
+              value={ category }
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+        {loading ? (
+          <div>Carregando...</div>
+        ) : (
+          <div className="recipes-container">
+            {recipes.slice(0, MAX_RECIPES).map((recipe, index) => (
+              <RecipeCard index={ index } key={ index } recipe={ recipe } />
+            ))}
+          </div>
+        )}
       </div>
       <Footer />
     </>

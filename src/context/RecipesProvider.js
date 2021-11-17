@@ -6,18 +6,9 @@ import RecipesContext from './RecipesContext';
 const { Provider } = RecipesContext;
 
 function RecipesProvider({ children }) {
-  const [mealsRecipes, setMealsRecipes] = useState([]);
-  const [drinksRecipes, setDrinksRecipes] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [recipes, setRecipes] = useState([]);
 
-  const value = {
-    drinksRecipes,
-    mealsRecipes,
-    loading,
-    setDrinksRecipes,
-    setLoading,
-    setMealsRecipes,
-  };
+  const value = { recipes, setRecipes };
 
   return <Provider value={ value }>{children}</Provider>;
 }

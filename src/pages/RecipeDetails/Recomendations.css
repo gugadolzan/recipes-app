@@ -1,0 +1,9 @@
+.recomendations-container {
+  display: flex;
+  overflow-x: scroll;
+}
+
+.recomendations-container * {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}

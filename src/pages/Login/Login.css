@@ -1,6 +1,51 @@
+.login-button {
+  background: #f55a00;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1.2rem;
+  height: 2.8rem;
+  width: 8rem;
+}
+
+.login-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.login-button:hover {
+  opacity: 0.8;
+}
+
 .login-form {
   align-items: center;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  left: 10%;
+  padding: 2rem 0;
+  position: absolute;
+  top: 20rem;
+  width: 80%;
+}
+
+.login-input {
+  border: none;
+  border-bottom: 1px solid black;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  width: 60%;
+}
+
+.login-input:focus {
+  outline: none;
+}
+
+.logo {
+  height: 100%;
+  width: 100%;
 }

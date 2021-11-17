@@ -12,8 +12,8 @@ function Profile() {
 
   return (
     <>
-      <Header />
-      <div className="profile-page">
+      <Header title="Perfil" />
+      <div className="header-padding-top profile-page">
         <h2 data-testid="profile-email">{email}</h2>
         <Link
           className="profile-btn"
