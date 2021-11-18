@@ -10,13 +10,15 @@ function Explore() {
   return (
     <>
       <Header title="Explorar" />
-      <div className="header-padding-top explore-links">
-        <Link data-testid="explore-food" to="/explorar/comidas">
-          Explorar Comidas
-        </Link>
-        <Link data-testid="explore-drinks" to="/explorar/bebidas">
-          Explorar Bebidas
-        </Link>
+      <div className="explore-background">
+        <div className="header-footer-padding explore-links">
+          <Link data-testid="explore-food" to="/explorar/comidas">
+            Explorar Comidas
+          </Link>
+          <Link data-testid="explore-drinks" to="/explorar/bebidas">
+            Explorar Bebidas
+          </Link>
+        </div>
       </div>
       <Footer />
     </>

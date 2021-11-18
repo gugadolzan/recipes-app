@@ -53,7 +53,7 @@ function ExploreByArea() {
     <>
       <Header title="Explorar Origem" />
       <select
-        className="header-padding-top"
+        className="header-footer-padding"
         data-testid="explore-by-area-dropdown"
         onChange={ ({ target }) => handleAreaChange(target.value) }
         value={ selectedArea }

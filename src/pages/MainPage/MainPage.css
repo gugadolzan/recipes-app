@@ -2,14 +2,14 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
-  margin: 0.5rem 0;
+  margin: 0.5rem 0.25rem;
 }
 
 .category-filter {
   background-color: #f55a00;
   border: none;
   border-radius: 6px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   color: white;
   cursor: pointer;
   font-size: 0.8rem;

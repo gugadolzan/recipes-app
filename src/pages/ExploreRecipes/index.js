@@ -31,30 +31,38 @@ function ExploreRecipes() {
   return (
     <>
       <Header title={ headerTitle } />
-      <div className="header-padding-top explore-recipes-links">
-        <button
-          type="button"
-          data-testid="explore-by-ingredient"
-          onClick={ () => history.push(`/explorar/${path}/ingredientes`) }
-        >
-          Por Ingredientes
-        </button>
-        {pathname.includes('/comidas') && (
+      <div
+        className={
+          path === 'comidas'
+            ? 'explore-meals-background'
+            : 'explore-drinks-background'
+        }
+      >
+        <div className="header-footer-padding explore-recipes-links">
           <button
             type="button"
-            data-testid="explore-by-area"
-            onClick={ () => history.push('/explorar/comidas/area') }
+            data-testid="explore-by-ingredient"
+            onClick={ () => history.push(`/explorar/${path}/ingredientes`) }
           >
-            Por Local de Origem
+            Por Ingredientes
           </button>
-        )}
-        <button
-          type="button"
-          data-testid="explore-surprise"
-          onClick={ handleSurprise }
-        >
-          Me Surpreenda!
-        </button>
+          {pathname.includes('/comidas') && (
+            <button
+              type="button"
+              data-testid="explore-by-area"
+              onClick={ () => history.push('/explorar/comidas/area') }
+            >
+              Por Local de Origem
+            </button>
+          )}
+          <button
+            type="button"
+            data-testid="explore-surprise"
+            onClick={ handleSurprise }
+          >
+            Me Surpreenda!
+          </button>
+        </div>
       </div>
       <Footer />
     </>

@@ -63,7 +63,7 @@ function MainPage() {
   return (
     <>
       <Header title={ headerTitle } />
-      <div className="header-padding-top main-background">
+      <div className="header-footer-padding main-background">
         <div className="category-filter-container">
           {categories.map((category) => (
             <button

@@ -13,30 +13,32 @@ function Profile() {
   return (
     <>
       <Header title="Perfil" />
-      <div className="header-padding-top profile-page">
-        <h2 data-testid="profile-email">{email}</h2>
-        <Link
-          className="profile-btn"
-          data-testid="profile-done-btn"
-          to="/receitas-feitas"
-        >
-          Receitas Feitas
-        </Link>
-        <Link
-          className="profile-btn"
-          data-testid="profile-favorite-btn"
-          to="/receitas-favoritas"
-        >
-          Receitas Favoritas
-        </Link>
-        <Link
-          className="profile-btn"
-          data-testid="profile-logout-btn"
-          onClick={ () => localStorage.clear() }
-          to="/"
-        >
-          Sair
-        </Link>
+      <div className="main-background">
+        <div className="header-footer-padding profile-page">
+          <h2 className="profile-email" data-testid="profile-email">{email}</h2>
+          <Link
+            className="profile-btn"
+            data-testid="profile-done-btn"
+            to="/receitas-feitas"
+          >
+            Receitas Feitas
+          </Link>
+          <Link
+            className="profile-btn"
+            data-testid="profile-favorite-btn"
+            to="/receitas-favoritas"
+          >
+            Receitas Favoritas
+          </Link>
+          <Link
+            className="profile-btn"
+            data-testid="profile-logout-btn"
+            onClick={ () => localStorage.clear() }
+            to="/"
+          >
+            Sair
+          </Link>
+        </div>
       </div>
       <Footer />
     </>

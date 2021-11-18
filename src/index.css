@@ -18,12 +18,34 @@ code {
 
 /* necessary to avoid elements overlap */
 /* header/footer overlap */
-.header-padding-top {
+.header-footer-padding {
   padding: 60px 0;
 }
 
+/* classes to set page background */
 .main-background {
-  background-image: url('./images/backgrounds/main.jpg');
+  background-image: url('./images/backgrounds/main.png');
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+.explore-background {
+  background-image: url('./images/backgrounds/explore.png');
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+.explore-meals-background {
+  background-image: url('./images/backgrounds/explore-meals.png');
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+.explore-drinks-background {
+  background-image: url('./images/backgrounds/explore-drinks.png');
   background-size: cover;
   background-attachment: fixed;
   min-height: 100vh;

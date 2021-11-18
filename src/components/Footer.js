@@ -30,13 +30,13 @@ const FOOTER_BUTTONS = [
 
 function Footer() {
   return (
-    <div className="footer" data-testid="footer">
+    <footer className="footer" data-testid="footer">
       {FOOTER_BUTTONS.map(({ alt, dataTestId, src, to }) => (
         <Link key={ alt } to={ to }>
           <img alt={ alt } data-testid={ dataTestId } src={ src } />
         </Link>
       ))}
-    </div>
+    </footer>
   );
 }
 
