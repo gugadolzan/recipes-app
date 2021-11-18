@@ -35,13 +35,12 @@ function RecipeDetails({ match: { params } }) {
 
   // fetch recipe details
   useEffect(() => {
-    setLoading(true);
-    const fetchRecipe = async () => {
+    const fetchRecipeDetails = async () => {
       const response = await lookup.details(recipeType, params.id);
       setRecipe(response[recipeType][0]);
       setLoading(false);
     };
-    fetchRecipe();
+    fetchRecipeDetails();
   }, [params.id, recipeType]);
   // fetch recomendations
   useEffect(() => {
