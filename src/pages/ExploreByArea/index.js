@@ -7,6 +7,8 @@ import RecipesContext from '../../context/RecipesContext';
 
 import methods from '../../services/api';
 
+import './ExploreByArea.css';
+
 const { filterBy, listAll, searchBy } = methods;
 const MAX_RECIPES = 12;
 
@@ -52,27 +54,29 @@ function ExploreByArea() {
   return (
     <>
       <Header title="Explorar Origem" />
-      <select
-        className="header-footer-padding"
-        data-testid="explore-by-area-dropdown"
-        onChange={ ({ target }) => handleAreaChange(target.value) }
-        value={ selectedArea }
-      >
-        {areas.map((area) => (
-          <option data-testid={ `${area}-option` } key={ area } value={ area }>
-            {area}
-          </option>
-        ))}
-      </select>
-      {loading ? (
-        <div>Carregando...</div>
-      ) : (
-        recipes
-          .slice(0, MAX_RECIPES)
-          .map((recipe, index) => (
-            <RecipeCard index={ index } key={ index } recipe={ recipe } />
-          ))
-      )}
+      <div className="header-footer-padding main-background">
+        <select
+          className="explore-by-area-dropdown"
+          data-testid="explore-by-area-dropdown"
+          onChange={ ({ target }) => handleAreaChange(target.value) }
+          value={ selectedArea }
+        >
+          {areas.map((area) => (
+            <option data-testid={ `${area}-option` } key={ area } value={ area }>
+              {area}
+            </option>
+          ))}
+        </select>
+        {loading ? (
+          <div>Carregando...</div>
+        ) : (
+          <div className="explore-by-area-recipes">
+            {recipes.slice(0, MAX_RECIPES).map((recipe, index) => (
+              <RecipeCard index={ index } key={ index } recipe={ recipe } />
+            ))}
+          </div>
+        )}
+      </div>
       <Footer />
     </>
   );

@@ -1,0 +1,26 @@
+.explore-by-area-recipes {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.explore-by-area-dropdown {
+  background-color: rgba(191, 80, 0, 1);
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  margin: 1rem auto;
+  padding: 0.4rem;
+  width: 50%;
+}
+
+.explore-by-area-dropdown:focus {
+  outline: none;
+}
+
+.explore-by-area-dropdown option {
+  background-color: #f55a00;
+  font-size: 1rem;
+}
