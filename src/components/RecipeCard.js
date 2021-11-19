@@ -7,7 +7,6 @@ import '../styles/RecipeCard.css';
 
 function RecipeCard({ index, recipe }) {
   const { pathname } = useLocation();
-
   const id = pathname === '/comidas' ? recipe.idMeal : recipe.idDrink;
   const image = pathname === '/comidas' ? recipe.strMealThumb : recipe.strDrinkThumb;
   const title = pathname === '/comidas' ? recipe.strMeal : recipe.strDrink;
