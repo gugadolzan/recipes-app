@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory } from 'react-router';
 
 import RecipesContext from '../context/RecipesContext';
 import methods from '../services/api';
@@ -24,37 +24,30 @@ const SEARCH_RADIO_OPTIONS = [
 ];
 
 function SearchBar() {
-  const { setCocktailsRecipes, setMealsRecipes } = useContext(RecipesContext);
+  const { setRecipes } = useContext(RecipesContext);
   const history = useHistory();
-  const { pathname } = useLocation();
   const [searchInput, setSearchInput] = useState('');
   const [searchRadio, setSearchRadio] = useState('');
 
-  const [recipeType, setRecipes] = pathname === '/comidas'
-    ? ['meals', setMealsRecipes]
-    : ['drinks', setCocktailsRecipes];
-
-  const redirectToDetails = (id) => {
-    history.push(`${pathname}/${id}`);
-  };
+  const { pathname } = history.location;
+  const [recipeId, recipeType] = pathname === '/comidas'
+    ? ['idMeal', 'meals']
+    : ['idDrink', 'drinks'];
 
   const fetchData = async (type) => {
     const response = await searchBy[type](recipeType, searchInput);
-    const key = Object.keys(response);
 
-    if (!response[key]) {
+    if (!response[recipeType]) {
       return global.alert(
         'Sinto muito, não encontramos nenhuma receita para esses filtros.',
       );
     }
 
-    if (response[key].length === 1) {
-      return redirectToDetails(
-        response[key][0].idDrink || response[key][0].idMeal,
-      );
+    if (response[recipeType].length === 1) {
+      return history.push(`${pathname}/${response[recipeType][0][recipeId]}`);
     }
 
-    return setRecipes(response[key]);
+    return setRecipes(response[recipeType]);
   };
 
   const handleSubmit = (e) => {

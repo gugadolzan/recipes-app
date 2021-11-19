@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 
@@ -8,41 +9,10 @@ import searchIcon from '../images/searchIcon.svg';
 
 import '../styles/Header.css';
 
-const PAGE_TITLES = {
-  '/comidas': 'Comidas',
-  '/bebidas': 'Bebidas',
-  '/explorar': 'Explorar',
-  '/explorar/comidas': 'Explorar Comidas',
-  '/explorar/bebidas': 'Explorar Bebidas',
-  '/explorar/comidas/ingredientes': 'Explorar Ingredientes',
-  '/explorar/bebidas/ingredientes': 'Explorar Ingredientes',
-  '/explorar/comidas/area': 'Explorar Origem',
-  '/receitas-feitas': 'Receitas Feitas',
-  '/receitas-favoritas': 'Receitas Favoritas',
-  '/perfil': 'Perfil',
-};
-
-function Header() {
+function Header({ title }) {
   const { pathname } = useLocation();
 
   const [showSearchBar, setShowSearchBar] = useState(false);
-
-  // const getPageTitle = () => {
-  //   const path = pathname.split('/');
-  //   path.shift();
-  //   // remove empty string from array
-
-  //   if (path.includes('ingredientes')) {
-  //     return 'Explorar Ingredientes';
-  //   }
-
-  //   const title = path.map(
-  //     (word) => word.charAt(0).toUpperCase() + word.slice(1),
-  //   );
-  //   // capitalize first letter of each word
-
-  //   return title.join(' ');
-  // };
 
   const searchTopButton = () => (
     <button
@@ -65,7 +35,7 @@ function Header() {
           />
         </Link>
         <span className="page-title" data-testid="page-title">
-          {PAGE_TITLES[pathname]}
+          {title}
         </span>
         {(pathname === '/comidas'
           || pathname === '/bebidas'
@@ -76,5 +46,9 @@ function Header() {
     </>
   );
 }
+
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
+};
 
 export default Header;

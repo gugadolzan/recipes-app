@@ -3,13 +3,13 @@ import React from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
-function ExploreCocktails() {
+function ExploreByIngredient() {
   return (
     <>
-      <Header />
+      <Header title="Explorar Ingredientes" />
       <Footer />
     </>
   );
 }
 
-export default ExploreCocktails;
+export default ExploreByIngredient;

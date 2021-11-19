@@ -1,0 +1,15 @@
+.explore-links {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.explore-links > * {
+  background-color: #ccc;
+  border-radius: 5px;
+  color: black;
+  font-size: 1.5em;
+  margin: 1rem;
+  padding: 1rem 4rem;
+}

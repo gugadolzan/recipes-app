@@ -13,20 +13,32 @@ const fetchData = async (api) => {
 
 const api = {
   meals: (endpoint) => fetchData(`${MEAL_API_URL}${endpoint}`),
-  // Reference: <https://www.themealdb.com/api.php>
+  // Reference: https://www.themealdb.com/api.php
+
   drinks: (endpoint) => fetchData(`${COCKTAIL_API_URL}${endpoint}`),
-  // Reference: <https://www.thecocktaildb.com/api.php>
+  // Reference: https://www.thecocktaildb.com/api.php
 };
 
 const methods = {
-  filterByCategory: (key, category) => api[key](`filter.php?c=${category}`),
-  listAllCategories: (key) => api[key]('list.php?c=list'),
-  listAllAreas: () => api.meals('list.php?a=list'),
-  filterByArea: (area) => api.meals(`filter.php?a=${area}`),
+  filterBy: {
+    area: (area) => api.meals(`filter.php?a=${area}`),
+    category: (key, category) => api[key](`filter.php?c=${category}`),
+  },
+
+  listAll: {
+    areas: () => api.meals('list.php?a=list'),
+    categories: (key) => api[key]('list.php?c=list'),
+  },
+
+  lookup: {
+    details: (key, id) => api[key](`lookup.php?i=${id}`),
+    random: (key) => api[key]('random.php'),
+  },
+
   searchBy: {
     ingredient: (key, ingredient) => api[key](`filter.php?i=${ingredient}`),
     name: (key, name) => api[key](`search.php?s=${name || ''}`),
-    // fetch initial recipes from www.themealdb.com/api/json/v1/1/search.php?s=
+    // fetch initial recipes and recomendations from www.themealdb.com/api/json/v1/1/search.php?s=
     firstLetter: (key, letter) => api[key](`search.php?f=${letter}`),
   },
 };

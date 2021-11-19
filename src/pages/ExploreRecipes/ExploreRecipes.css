@@ -1,0 +1,18 @@
+.explore-recipes-links {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.explore-recipes-links > * {
+  background-color: #ccc;
+  border: none;
+  border-radius: 5px;
+  color: black;
+  cursor: pointer;
+  font-size: 1.5em;
+  margin: 1rem;
+  padding: 1rem;
+  width: 20rem;
+}
