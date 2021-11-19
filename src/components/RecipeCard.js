@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 
 import '../styles/RecipeCard.css';
 
-function RecipeCard({ index, recipe }) {
-  const { pathname } = useLocation();
-  const id = pathname === '/comidas' ? recipe.idMeal : recipe.idDrink;
-  const image = pathname === '/comidas' ? recipe.strMealThumb : recipe.strDrinkThumb;
-  const title = pathname === '/comidas' ? recipe.strMeal : recipe.strDrink;
+function RecipeCard({ dataTestid, index, recipe, titleTestid }) {
+  const keys = Object.keys(recipe);
+  const [id, title, image] = [
+    keys.find((key) => key.includes('id')),
+    keys.find((key) => key === 'strMeal' || key === 'strDrink'),
+    keys.find((key) => key.includes('Thumb')),
+  ];
 
   return (
     <Link
