@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useLocation } from 'react-router';
+import { useHistory } from 'react-router';
 
 import methods from '../../services/api';
 
@@ -9,7 +9,8 @@ import ShareAndFavorite from '../RecipeDetails/ShareAndFavorite';
 const { lookup } = methods;
 
 function RecipeInProgress({ match: { params } }) {
-  const { pathname } = useLocation();
+  const history = useHistory();
+  const { location: { pathname } } = history;
   const [recipeType, storageType, thumb, title] = pathname.includes('/comidas')
     ? ['meals', 'meals', 'strMealThumb', 'strMeal']
     : ['drinks', 'cocktails', 'strDrinkThumb', 'strDrink'];
@@ -151,6 +152,8 @@ function RecipeInProgress({ match: { params } }) {
       <button
         // className="finish-recipe-btn"
         data-testid="finish-recipe-btn"
+        disabled={ recipeIngredients.length !== inProgress.length }
+        onClick={ () => history.push('/receitas-feitas') }
         type="button"
       >
         Finish Recipe
