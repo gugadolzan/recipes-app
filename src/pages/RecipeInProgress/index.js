@@ -27,8 +27,6 @@ function RecipeInProgress({ match: { params } }) {
       setLoading(false);
     };
     fetchRecipeDetails();
-
-    console.log('fetching recipe details');
   }, [params.id, recipeType]);
 
   useEffect(() => {
@@ -80,9 +78,7 @@ function RecipeInProgress({ match: { params } }) {
         ...inProgressRecipesStorage,
         [storageType]: {
           ...inProgressRecipesStorage[storageType],
-          [params.id]: inProgress.filter(
-            (curr) => curr !== value,
-          ),
+          [params.id]: inProgress.filter((curr) => curr !== value),
         },
       };
     }
@@ -120,30 +116,24 @@ function RecipeInProgress({ match: { params } }) {
       {recipeIngredients.map((ingredient, index) => (
         // ingredient[0] = strIngredient1, strIngredient2, ...
         // ingredient[1] = ingredient name
-        <>
-          <label
-            data-testid={ `${index}-ingredient-step` }
-            htmlFor={ ingredient[0] }
-            key={ ingredient[0] }
-          >
-            <input
-              checked={
-                inProgress.includes(ingredient[0])
-              }
-              type="checkbox"
-              id={ ingredient[0] }
-              onChange={ ({ target }) => handleProgress(target) }
-              value={ ingredient[0] }
-              // data-testid={ ingredient }
-            />
-            {ingredient[1]}
-            {ingredientsMeasures[index] && (
-              <span>{` - ${ingredientsMeasures[index][1]}`}</span>
-            )}
-          </label>
-          <br />
-          {/* remove <br /> */}
-        </>
+        <label
+          data-testid={ `${index}-ingredient-step` }
+          htmlFor={ ingredient[0] }
+          key={ index }
+        >
+          <input
+            checked={ inProgress.includes(ingredient[0]) }
+            type="checkbox"
+            id={ ingredient[0] }
+            onChange={ ({ target }) => handleProgress(target) }
+            value={ ingredient[0] }
+            // data-testid={ ingredient }
+          />
+          {ingredient[1]}
+          {ingredientsMeasures[index] && (
+            <span>{` - ${ingredientsMeasures[index][1]}`}</span>
+          )}
+        </label>
       ))}
 
       <h2 data-testid="instructions">Instructions</h2>
