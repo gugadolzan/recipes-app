@@ -1,30 +1,27 @@
 .recipe-card {
   align-items: center;
-  background-color: #bf5000;
+  background-color: #f8f8f8;
   border-radius: 1rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  color: #141414;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin: 0.25rem 0;
-  width: 160px;
+  padding: 0 0.75rem 0.75rem;
+  width: calc(160px - 1.5rem);
 }
 
 .recipe-card-image {
-  border-bottom-left-radius: 1rem;
-  border-bottom-right-radius: 1rem;
-  border-top: 1px solid black;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
   height: 80px;
   object-fit: cover;
-  width: 160px;
+  width: calc(160px - 1.5rem);
 }
 
 .recipe-card-title {
   align-self: flex-start;
-  color: white;
   font-size: 1.1rem;
   font-weight: 400;
-  margin: 0.5rem;
-  padding: 0.25rem;
 }

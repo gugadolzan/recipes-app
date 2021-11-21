@@ -5,11 +5,11 @@
 }
 
 .explore-by-area-dropdown {
-  background-color: rgba(191, 80, 0, 1);
+  background-color: #ff6710;
   border: none;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  color: white;
+  color: #141414;
   display: flex;
   margin: 1rem auto;
   padding: 0.4rem;
@@ -21,6 +21,6 @@
 }
 
 .explore-by-area-dropdown option {
-  background-color: #f55a00;
+  background-color: #ff6710;
   font-size: 1rem;
 }

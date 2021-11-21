@@ -1,11 +1,12 @@
 .footer {
-  background-color: #bf5000;
+  align-items: center;
+  background-color: #dc5100;
   bottom: 0;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: space-evenly;
-  max-height: 60px;
-  padding: 0.5rem 0;
+  height: 2rem;
+  justify-content: space-around;
+  padding: 1rem 0;
   position: fixed;
   width: 100%;
 }

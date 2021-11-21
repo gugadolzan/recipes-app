@@ -7,7 +7,7 @@ import methods from '../../services/api';
 
 import RecipeIngredients from './RecipeIngredients';
 import Recomendations from './Recomendations';
-import ShareAndFavorite from './ShareAndFavorite';
+import ShareAndFavorite from '../../components/ShareAndFavorite';
 
 import './RecipeDetails.css';
 
@@ -59,7 +59,7 @@ function RecipeDetails({ match: { params } }) {
   );
 
   if (loading) {
-    return <div>Carregando...</div>;
+    return <div>Loading...</div>;
   }
 
   return (
@@ -70,32 +70,43 @@ function RecipeDetails({ match: { params } }) {
         data-testid="recipe-photo"
         src={ recipe[thumb] }
       />
-      <h1 data-testid="recipe-title">{recipe[title]}</h1>
-      <h3 data-testid="recipe-category">
-        {pathname.includes('/comidas')
-          ? recipe.strCategory
-          : recipe.strAlcoholic}
-      </h3>
-
-      <ShareAndFavorite recipe={ recipe } />
-
-      <RecipeIngredients
-        ingredients={ recipeIngredients }
-        measures={ ingredientsMeasures }
-      />
-
-      <h2 data-testid="instructions">Instructions</h2>
-      <p data-testid="instructions">{recipe.strInstructions}</p>
+      <div className="recipe-header">
+        <div className="recipe-title-container">
+          <h1 data-testid="recipe-title">{recipe[title]}</h1>
+          <h3 data-testid="recipe-category">
+            {pathname.includes('/comidas')
+              ? recipe.strCategory
+              : recipe.strAlcoholic}
+          </h3>
+        </div>
+        <ShareAndFavorite recipe={ recipe } />
+      </div>
+      <h2 className="recipe-title">Ingredients</h2>
+      <div className="recipe-details-text-container">
+        <RecipeIngredients
+          ingredients={ recipeIngredients }
+          measures={ ingredientsMeasures }
+        />
+      </div>
+      <h2 className="recipe-title" data-testid="instructions">
+        Instructions
+      </h2>
+      <p
+        className="recipe-details-text-container recipe-instructions"
+        data-testid="instructions"
+      >
+        {recipe.strInstructions}
+      </p>
       {pathname.includes('/comidas') && recipe.strYoutube && (
         <iframe
+          className="recipe-video"
           data-testid="video"
           title="How to"
           src={ recipe.strYoutube.replace('watch?v=', 'embed/') }
         />
       )}
-
+      <h2 className="recipe-title">Recomendations</h2>
       <Recomendations recomendations={ recomendations } />
-
       <Link
         className="start-recipe-btn"
         data-testid="start-recipe-btn"

@@ -4,7 +4,7 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: -apple-system, BlinkMacSystemFont, 'Arimo', 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -19,7 +19,7 @@ code {
 /* necessary to avoid elements overlap */
 /* header/footer overlap */
 .header-footer-padding {
-  padding: 60px 0;
+  padding: 4rem 0;
 }
 
 /* classes to set page background */

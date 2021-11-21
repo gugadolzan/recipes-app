@@ -4,13 +4,15 @@ import { useHistory } from 'react-router';
 
 import methods from '../../services/api';
 
-import ShareAndFavorite from '../RecipeDetails/ShareAndFavorite';
+import ShareAndFavorite from '../../components/ShareAndFavorite';
 
 const { lookup } = methods;
 
 function RecipeInProgress({ match: { params } }) {
   const history = useHistory();
-  const { location: { pathname } } = history;
+  const {
+    location: { pathname },
+  } = history;
   const [recipeType, storageType, thumb, title] = pathname.includes('/comidas')
     ? ['meals', 'meals', 'strMealThumb', 'strMeal']
     : ['drinks', 'cocktails', 'strDrinkThumb', 'strDrink'];
@@ -95,52 +97,59 @@ function RecipeInProgress({ match: { params } }) {
   }
 
   return (
-    <div>
+    <div className="recipe-details">
       <img
         alt={ recipe[title] }
         className="recipe-photo"
-        // update className
         data-testid="recipe-photo"
         src={ recipe[thumb] }
       />
-      <h1 data-testid="recipe-title">{recipe[title]}</h1>
-      <h3 data-testid="recipe-category">
-        {pathname.includes('/comidas')
-          ? recipe.strCategory
-          : recipe.strAlcoholic}
-      </h3>
-
-      <ShareAndFavorite recipe={ recipe } />
-
-      <h2>Ingredients</h2>
-      {recipeIngredients.map((ingredient, index) => (
-        // ingredient[0] = strIngredient1, strIngredient2, ...
-        // ingredient[1] = ingredient name
-        <label
-          data-testid={ `${index}-ingredient-step` }
-          htmlFor={ ingredient[0] }
-          key={ index }
-        >
-          <input
-            checked={ inProgress.includes(ingredient[0]) }
-            type="checkbox"
-            id={ ingredient[0] }
-            onChange={ ({ target }) => handleProgress(target) }
-            value={ ingredient[0] }
-            // data-testid={ ingredient }
-          />
-          {ingredient[1]}
-          {ingredientsMeasures[index] && (
-            <span>{` - ${ingredientsMeasures[index][1]}`}</span>
-          )}
-        </label>
-      ))}
-
-      <h2 data-testid="instructions">Instructions</h2>
-      <p data-testid="instructions">{recipe.strInstructions}</p>
-
+      <div className="recipe-header">
+        <div className="recipe-title-container">
+          <h1 data-testid="recipe-title">{recipe[title]}</h1>
+          <h3 data-testid="recipe-category">
+            {pathname.includes('/comidas')
+              ? recipe.strCategory
+              : recipe.strAlcoholic}
+          </h3>
+        </div>
+        <ShareAndFavorite recipe={ recipe } />
+      </div>
+      <h2 className="recipe-title">Ingredients</h2>
+      <div className="recipe-details-text-container">
+        {recipeIngredients.map((ingredient, index) => (
+          // ingredient[0] = strIngredient1, strIngredient2, ...
+          // ingredient[1] = ingredient name
+          <label
+            data-testid={ `${index}-ingredient-step` }
+            htmlFor={ ingredient[0] }
+            key={ index }
+          >
+            <input
+              checked={ inProgress.includes(ingredient[0]) }
+              type="checkbox"
+              id={ ingredient[0] }
+              onChange={ ({ target }) => handleProgress(target) }
+              value={ ingredient[0] }
+            />
+            {ingredient[1]}
+            {ingredientsMeasures[index] && (
+              <span>{` - ${ingredientsMeasures[index][1]}`}</span>
+            )}
+          </label>
+        ))}
+      </div>
+      <h2 className="recipe-title" data-testid="instructions">
+        Instructions
+      </h2>
+      <p
+        className="recipe-details-text-container recipe-instructions"
+        data-testid="instructions"
+      >
+        {recipe.strInstructions}
+      </p>
       <button
-        // className="finish-recipe-btn"
+        className="start-recipe-btn"
         data-testid="finish-recipe-btn"
         disabled={ recipeIngredients.length !== inProgress.length }
         onClick={ () => history.push('/receitas-feitas') }

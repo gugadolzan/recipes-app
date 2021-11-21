@@ -2,18 +2,18 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 120px);
+  height: calc(100vh - 8rem);
 
-  /* 120px from header-footer-padding class */
+  /* 8rem from header-footer-padding class */
   justify-content: space-around;
 }
 
 .explore-recipes-links > * {
-  background-color: #f55a00;
+  background-color: #f8f8f8;
   border: none;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  color: white;
+  color: #141414;
   cursor: pointer;
   font-size: 1.2em;
   margin: 1rem;
