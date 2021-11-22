@@ -93,9 +93,7 @@ function RecipeInProgress({ match: { params } }) {
     );
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  if (loading) return <div className="loader" />;
 
   return (
     <div className="recipe-details">

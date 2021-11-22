@@ -3,12 +3,12 @@
 }
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Arimo', 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, 'Arimo', 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin: 0;
 }
 
 code {
@@ -17,36 +17,65 @@ code {
 }
 
 /* necessary to avoid elements overlap */
+
 /* header/footer overlap */
 .header-footer-padding {
   padding: 4rem 0;
 }
 
 /* classes to set page background */
-.main-background {
+.login-background {
+  background-attachment: fixed;
   background-image: url('./images/backgrounds/main.png');
   background-size: cover;
-  background-attachment: fixed;
   min-height: 100vh;
+}
+
+.main-background {
+  background-attachment: fixed;
+  background-image: url('./images/backgrounds/main.png');
+  background-size: cover;
+  min-height: calc(100vh - 8rem);
 }
 
 .explore-background {
+  background-attachment: fixed;
   background-image: url('./images/backgrounds/explore.png');
   background-size: cover;
-  background-attachment: fixed;
-  min-height: 100vh;
+  min-height: calc(100vh - 8rem);
 }
 
 .explore-meals-background {
+  background-attachment: fixed;
   background-image: url('./images/backgrounds/explore-meals.png');
   background-size: cover;
-  background-attachment: fixed;
-  min-height: 100vh;
+  min-height: calc(100vh - 8rem);
 }
 
 .explore-drinks-background {
+  background-attachment: fixed;
   background-image: url('./images/backgrounds/explore-drinks.png');
   background-size: cover;
-  background-attachment: fixed;
-  min-height: 100vh;
+  min-height: calc(100vh - 8rem);
+}
+
+.loader {
+  animation: spin 1s linear infinite;
+  border: 16px solid #f8f8f8;
+  border-radius: 50%;
+  border-top: 16px solid #ff6710;
+  height: 5rem;
+  margin: 0 auto;
+  margin-top: 5rem;
+  width: 5rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }

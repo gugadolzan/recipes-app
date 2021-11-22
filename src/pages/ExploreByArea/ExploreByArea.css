@@ -1,7 +1,18 @@
 .explore-by-area-recipes {
+  animation-duration: 1s;
+  animation-name: animatebottom;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
+}
+
+@keyframes animatebottom {
+
+  from { bottom: -100px;
+    opacity: 0; }
+
+  to { bottom: 0;
+    opacity: 1; }
 }
 
 .explore-by-area-dropdown {

@@ -32,7 +32,7 @@ function Login() {
   };
 
   return (
-    <div className="main-background">
+    <div className="login-background">
       <img alt="logo" className="logo" src={ logo } />
       <form className="login-form" onSubmit={ handleCLick }>
         <LoginInput

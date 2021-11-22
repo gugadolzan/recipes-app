@@ -58,9 +58,7 @@ function RecipeDetails({ match: { params } }) {
     (curr) => curr[0].includes('strMeasure') && curr[1],
   );
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  if (loading) return <div className="loader" />;
 
   return (
     <div className="recipe-details">

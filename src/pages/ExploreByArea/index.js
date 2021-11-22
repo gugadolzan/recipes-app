@@ -68,7 +68,7 @@ function ExploreByArea() {
           ))}
         </select>
         {loading ? (
-          <div>Loading...</div>
+          <div className="loader" />
         ) : (
           <div className="explore-by-area-recipes">
             {recipes.slice(0, MAX_RECIPES).map((recipe, index) => (

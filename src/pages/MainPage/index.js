@@ -79,7 +79,7 @@ function MainPage() {
           ))}
         </div>
         {loading ? (
-          <div>Loading...</div>
+          <div className="loader" />
         ) : (
           <div className="recipes-container">
             {recipes.slice(0, MAX_RECIPES).map((recipe, index) => (
