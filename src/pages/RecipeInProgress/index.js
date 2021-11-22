@@ -5,6 +5,7 @@ import { useHistory } from 'react-router';
 import methods from '../../services/api';
 
 import ShareAndFavorite from '../../components/ShareAndFavorite';
+import FinishRecipeButton from './FinishRecipeButton';
 
 const { lookup } = methods;
 
@@ -148,15 +149,10 @@ function RecipeInProgress({ match: { params } }) {
       >
         {recipe.strInstructions}
       </p>
-      <button
-        className="start-recipe-btn"
-        data-testid="finish-recipe-btn"
-        disabled={ recipeIngredients.length !== inProgress.length }
-        onClick={ () => history.push('/receitas-feitas') }
-        type="button"
-      >
-        Finish Recipe
-      </button>
+      <FinishRecipeButton
+        isDisabled={ recipeIngredients.length !== inProgress.length }
+        recipe={ recipe }
+      />
     </div>
   );
 }
