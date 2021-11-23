@@ -14,7 +14,7 @@ const MAX_CATEGORIES = 5;
 const MAX_RECIPES = 12;
 
 function MainPage() {
-  const { recipes, setRecipes } = useContext(RecipesContext);
+  const { ingredient, setIngredient, recipes, setRecipes } = useContext(RecipesContext);
   const { pathname } = useLocation();
   const [categories, setCategories] = useState([]);
   const [filter, setFilter] = useState('All');
@@ -27,7 +27,10 @@ function MainPage() {
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
-      const response = await searchBy.name(recipeType);
+      const response = ingredient
+        ? await searchBy.ingredient(recipeType, ingredient)
+        : await searchBy.name(recipeType);
+      setIngredient('');
       setRecipes(response[recipeType]);
       setLoading(false);
     };

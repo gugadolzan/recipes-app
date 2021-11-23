@@ -1,12 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
+import methods from '../../services/api';
 
 import Header from '../../components/Header';
+import IngredientCard from './IngredientCard';
 import Footer from '../../components/Footer';
 
+import './ExploreByIngredient.css';
+
+const { listAll } = methods;
+const MAX_INGREDIENTS = 12;
+
 function ExploreByIngredient() {
+  const { pathname } = useLocation();
+  const [recipeType] = pathname.includes('comidas') ? ['meals'] : ['drinks'];
+  const [ingredients, setIngredients] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchIngredients = async () => {
+      const response = await listAll.ingredients(recipeType);
+      setIngredients(response[recipeType].slice(0, MAX_INGREDIENTS));
+      setLoading(false);
+    };
+    fetchIngredients();
+  }, [recipeType]);
+
   return (
     <>
       <Header title="Explorar Ingredientes" />
+      <div className="header-footer-padding main-background">
+        {loading ? (
+          <div className="loader" />
+        ) : (
+          <div className="ingredients-list">
+            {ingredients.map((ingredient, index) => (
+              <IngredientCard
+                key={ index }
+                index={ index }
+                ingredient={ ingredient }
+                recipeType={ recipeType }
+              />
+            ))}
+          </div>
+        )}
+      </div>
       <Footer />
     </>
   );

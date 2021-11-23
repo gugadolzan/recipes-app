@@ -1,0 +1,48 @@
+.ingredient-card {
+  align-items: center;
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 12rem;
+  justify-content: center;
+  margin: 0.5rem;
+  padding: 0.75rem;
+  width: 8rem;
+}
+
+.ingredient-card h2 {
+  align-self: flex-start;
+  color: #141414;
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin: 0.5rem 0;
+}
+
+.ingredient-card img {
+  height: 100%;
+  object-fit: cover;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.ingredients-list {
+  animation-duration: 1s;
+  animation-name: animatebottom;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0.5rem 0;
+}
+
+@keyframes animatebottom {
+
+  from { bottom: -100px;
+    opacity: 0; }
+
+  to { bottom: 0;
+    opacity: 1; }
+}
