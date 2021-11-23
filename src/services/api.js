@@ -44,3 +44,15 @@ const methods = {
 };
 
 export default methods;
+
+export const fetchIngredientesListCocktails = async (strIngredient1) => {
+  const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${strIngredient1}`);
+  const { drinks } = await response.json();
+  return drinks;
+};
+
+export const fetchIngredientesListMeal = async (strIngredient) => {
+  const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${strIngredient}`);
+  const { meals } = await response.json();
+  return meals;
+};
