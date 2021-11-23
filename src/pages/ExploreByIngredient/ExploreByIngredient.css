@@ -29,9 +29,9 @@
 }
 
 .ingredients-list {
+  align-items: center;
   animation-duration: 1s;
   animation-name: animatebottom;
-  align-items: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

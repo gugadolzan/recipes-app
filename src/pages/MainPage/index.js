@@ -30,12 +30,17 @@ function MainPage() {
       const response = ingredient
         ? await searchBy.ingredient(recipeType, ingredient)
         : await searchBy.name(recipeType);
-      setIngredient('');
-      setRecipes(response[recipeType]);
-      setLoading(false);
+      // setIngredient('');
+      // setRecipes(response[recipeType]);
+      if (response) {
+        setRecipes(response[recipeType]);
+        setLoading(false);
+      }
     };
     fetchData();
-  }, [recipeType, setRecipes]);
+  }, [ingredient, recipeType, setRecipes]);
+
+  useEffect(() => () => setIngredient(''), [recipeType, setIngredient]);
 
   useEffect(() => {
     const fetchCategories = async () => {
