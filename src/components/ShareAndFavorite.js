@@ -62,7 +62,8 @@ export default function ShareAndFavorite({ recipe }) {
         data-testid="share-btn"
         onClick={ () => {
           setShowCopyToClipboard(true);
-          copy(window.location.href.replace('/in-progress', ''));
+          const url = window.location.href.split('/');
+          copy(`${url[0]}//${url[2]}/${type}s/${recipe[id]}`);
         } }
         src={ shareIcon }
         type="image"
