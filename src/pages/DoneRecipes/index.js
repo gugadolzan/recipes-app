@@ -1,27 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
+import CategoriesFilters from '../../components/CategoriesFilters';
 import DoneRecipeCard from './DoneRecipeCard';
 
 import './DoneRecipes.css';
-
-const FILTER_BUTTONS = [
-  {
-    dataTestId: 'filter-by-all-btn',
-    text: 'All',
-    value: '',
-  },
-  {
-    dataTestId: 'filter-by-food-btn',
-    text: 'Food',
-    value: 'comida',
-  },
-  {
-    dataTestId: 'filter-by-drink-btn',
-    text: 'Drinks',
-    value: 'bebida',
-  },
-];
 
 function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState([]);
@@ -47,20 +30,9 @@ function DoneRecipes() {
         </div>
       ) : (
         <div className="header-footer-padding main-background">
-          <div className="category-filter-container">
-            {FILTER_BUTTONS.map((button) => (
-              <button
-                className="category-filter"
-                data-testid={ button.dataTestId }
-                key={ button.dataTestId }
-                onClick={ ({ target }) => setFilter(target.value) }
-                type="button"
-                value={ button.value }
-              >
-                {button.text}
-              </button>
-            ))}
-          </div>
+          <CategoriesFilters
+            onClick={ ({ target }) => setFilter(target.value) }
+          />
           <div className="done-recipes-container">
             {doneRecipes
               .filter(({ type }) => type.includes(filter))
