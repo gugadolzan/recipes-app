@@ -11,7 +11,9 @@ export default function FinishRecipeButton({ isDisabled, recipe }) {
 
   const finishRecipe = () => {
     const { strAlcoholic, strArea, strCategory, strTags } = recipe;
+
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+
     const newDoneRecipes = [
       ...doneRecipes,
       {

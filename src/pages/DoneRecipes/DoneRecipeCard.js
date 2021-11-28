@@ -18,6 +18,7 @@ export default function DoneRecipeCard({ index, recipe }) {
     type,
   } = recipe;
   const recipeDetailsLink = type === 'comida' ? `/comidas/${id}` : `/bebidas/${id}`;
+
   const [showCopyToClipboard, setShowCopyToClipboard] = useState(false);
 
   return (

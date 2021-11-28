@@ -22,6 +22,7 @@ function ExploreRecipes() {
   const handleSurprise = async () => {
     const response = await lookup.random(recipeType);
     const id = response[recipeType][0][recipeId];
+
     history.push(`/${path}/${id}`);
   };
 

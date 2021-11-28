@@ -13,6 +13,7 @@ export default function FavoriteRecipeCard({
 }) {
   const { alcoholicOrNot, area, category, id, image, name, type } = recipe;
   const recipeDetailsLink = type === 'comida' ? `/comidas/${id}` : `/bebidas/${id}`;
+
   const [showCopyToClipboard, setShowCopyToClipboard] = useState(false);
 
   const handleFavorite = (target) => {
@@ -22,6 +23,7 @@ export default function FavoriteRecipeCard({
     const newFavoriteRecipesStorage = favoriteRecipesStorage.filter(
       (curr) => curr.id !== target.value,
     );
+
     localStorage.setItem(
       'favoriteRecipes',
       JSON.stringify(newFavoriteRecipesStorage),

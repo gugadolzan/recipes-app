@@ -39,14 +39,17 @@ function RecipeDetails({ match: { params } }) {
       setRecipe(response[recipeType][0]);
       setLoading(false);
     };
+
     fetchRecipeDetails();
   }, [params.id, recipeType]);
+
   // fetch recomendations
   useEffect(() => {
     const fetchRecomendations = async () => {
       const response = await searchBy.name(reverseType);
       setRecomendations(response[reverseType]);
     };
+
     fetchRecomendations();
   }, [reverseType]);
 

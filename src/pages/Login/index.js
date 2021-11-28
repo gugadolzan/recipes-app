@@ -15,9 +15,11 @@ function Login() {
 
   const handleCLick = async (e) => {
     e.preventDefault();
+
     INITIAL_LOCAL_STORAGE.forEach(({ key, value }) => (key === 'user'
       ? localStorage.setItem('user', JSON.stringify({ email }))
       : localStorage.setItem(key, JSON.stringify(value))));
+
     history.push('/comidas');
   };
 

@@ -14,6 +14,7 @@ const MAX_INGREDIENTS = 12;
 function ExploreByIngredient() {
   const { pathname } = useLocation();
   const [recipeType] = pathname.includes('comidas') ? ['meals'] : ['drinks'];
+
   const [ingredients, setIngredients] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -23,6 +24,7 @@ function ExploreByIngredient() {
       setIngredients(response[recipeType].slice(0, MAX_INGREDIENTS));
       setLoading(false);
     };
+
     fetchIngredients();
   }, [recipeType]);
 

@@ -11,7 +11,9 @@ const THUMBNAIL_IMAGE_URL = {
 
 export default function IngredientCard({ index, ingredient, recipeType }) {
   const { setIngredient } = useContext(RecipesContext);
+
   const history = useHistory();
+
   const name = ingredient[
     Object.keys(ingredient).find((key) => key.includes('strIngredient'))
   ];

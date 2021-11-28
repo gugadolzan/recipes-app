@@ -13,6 +13,7 @@ const MAX_RECIPES = 12;
 
 function ExploreByArea() {
   const { recipes, setRecipes } = useContext(RecipesContext);
+
   const [areas, setAreas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedArea, setSelectedArea] = useState('All');
@@ -23,6 +24,7 @@ function ExploreByArea() {
       setRecipes((prevState) => (prevState.length === 0 ? meals : prevState));
       setLoading(false);
     };
+
     fetchData();
   }, [setLoading, setRecipes]);
 
@@ -32,6 +34,7 @@ function ExploreByArea() {
       const areaList = meals.map(({ strArea }) => strArea);
       setAreas(['All', ...areaList]);
     };
+
     fetchData();
   }, []);
 

@@ -11,6 +11,7 @@ const { lookup } = methods;
 function RecipeInProgress({ match: { params } }) {
   const history = useHistory();
   const { pathname } = history.location;
+
   const [recipeType, storageType, thumb, title] = pathname.includes('/comidas')
     ? ['meals', 'meals', 'strMealThumb', 'strMeal']
     : ['drinks', 'cocktails', 'strDrinkThumb', 'strDrink'];
@@ -26,6 +27,7 @@ function RecipeInProgress({ match: { params } }) {
       setRecipe(response[recipeType][0]);
       setLoading(false);
     };
+
     fetchRecipeDetails();
   }, [params.id, recipeType]);
 
@@ -33,6 +35,7 @@ function RecipeInProgress({ match: { params } }) {
     const inProgressRecipesStorage = JSON.parse(
       localStorage.getItem('inProgressRecipes'),
     );
+
     // create localStorage if it doesn't exist
     if (!inProgressRecipesStorage) {
       localStorage.setItem(
@@ -43,6 +46,7 @@ function RecipeInProgress({ match: { params } }) {
         }),
       );
     }
+
     // get in progress recipe from localStorage
     const inProgressRecipes = JSON.parse(
       localStorage.getItem('inProgressRecipes'),
@@ -84,6 +88,7 @@ function RecipeInProgress({ match: { params } }) {
     }
 
     setInProgress(newInProgressRecipes[storageType][params.id]);
+
     localStorage.setItem(
       'inProgressRecipes',
       JSON.stringify(newInProgressRecipes),
