@@ -81,6 +81,7 @@
   justify-content: center;
 }
 
+/* classes below are used in favorites component */
 .no-recipes-container {
   align-items: center;
   background-color: #f8f8f8;

@@ -5,7 +5,6 @@ import copy from 'clipboard-copy';
 import shareIcon from '../../images/shareIcon.svg';
 
 function DoneRecipeCard({ index, recipe }) {
-  const [showCopyToClipboard, setShowCopyToClipboard] = useState(false);
   const {
     alcoholicOrNot,
     area,
@@ -18,15 +17,16 @@ function DoneRecipeCard({ index, recipe }) {
     type,
   } = recipe;
   const recipeDetailsLink = type === 'comida' ? `/comidas/${id}` : `/bebidas/${id}`;
+  const [showCopyToClipboard, setShowCopyToClipboard] = useState(false);
 
   return (
     <div className="done-recipe-card">
       <Link to={ recipeDetailsLink }>
         <img
+          alt={ name }
           className="done-recipes-card-image"
           data-testid={ `${index}-horizontal-image` }
           src={ image }
-          alt={ name }
         />
       </Link>
       <div className="done-recipe-card-info">
