@@ -23,7 +23,7 @@ const SEARCH_RADIO_OPTIONS = [
   },
 ];
 
-function SearchBar() {
+export default function SearchBar() {
   const { setRecipes } = useContext(RecipesContext);
   const history = useHistory();
   const [searchInput, setSearchInput] = useState('');
@@ -105,5 +105,3 @@ function SearchBar() {
     </form>
   );
 }
-
-export default SearchBar;

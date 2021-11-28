@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
 
-function FinishRecipeButton({ isDisabled, recipe }) {
+export default function FinishRecipeButton({ isDisabled, recipe }) {
   const history = useHistory();
   const {
     location: { pathname },
@@ -50,5 +50,3 @@ FinishRecipeButton.propTypes = {
   isDisabled: PropTypes.bool.isRequired,
   recipe: PropTypes.objectOf(PropTypes.any).isRequired,
 };
-
-export default FinishRecipeButton;

@@ -28,7 +28,7 @@ const FOOTER_BUTTONS = [
   },
 ];
 
-function Footer() {
+export default function Footer() {
   return (
     <footer className="footer" data-testid="footer">
       {FOOTER_BUTTONS.map(({ alt, dataTestId, src, to }) => (
@@ -39,5 +39,3 @@ function Footer() {
     </footer>
   );
 }
-
-export default Footer;

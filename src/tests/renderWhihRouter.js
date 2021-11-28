@@ -3,7 +3,7 @@ import { Router } from 'react-router';
 import { createMemoryHistory } from 'history';
 import { render } from '@testing-library/react';
 
-function renderWithRouter(componentToRender) {
+export default function renderWithRouter(componentToRender) {
   const customHistory = createMemoryHistory();
 
   return {
@@ -15,5 +15,3 @@ function renderWithRouter(componentToRender) {
     history: customHistory,
   };
 }
-
-export default renderWithRouter;

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import shareIcon from '../../images/shareIcon.svg';
 
-function DoneRecipeCard({ index, recipe }) {
+export default function DoneRecipeCard({ index, recipe }) {
   const {
     alcoholicOrNot,
     area,
@@ -99,5 +99,3 @@ DoneRecipeCard.propTypes = {
     type: PropTypes.string.isRequired,
   }).isRequired,
 };
-
-export default DoneRecipeCard;

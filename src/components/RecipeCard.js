@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import '../styles/RecipeCard.css';
 
-function RecipeCard({ dataTestid, index, recipe, titleTestid }) {
+export default function RecipeCard({ dataTestid, index, recipe, titleTestid }) {
   const keys = Object.keys(recipe);
   const [id, title, image] = [
     keys.find((key) => key.includes('id')),
@@ -42,5 +42,3 @@ RecipeCard.defaultProps = {
   dataTestid: 'recipe-card',
   titleTestid: 'card-name',
 };
-
-export default RecipeCard;
