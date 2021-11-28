@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 
-import methods from '../../services/api';
-
 import RecipeIngredients from './RecipeIngredients';
 import Recomendations from './Recomendations';
 import ShareAndFavorite from '../../components/ShareAndFavorite';
+import methods from '../../services/api';
 
 import './RecipeDetails.css';
 

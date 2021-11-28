@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import copy from 'clipboard-copy';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import copy from 'clipboard-copy';
+
 import shareIcon from '../../images/shareIcon.svg';
 
 export default function DoneRecipeCard({ index, recipe }) {

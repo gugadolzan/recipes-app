@@ -1,10 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 
-import methods from '../../services/api';
-
-import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import Header from '../../components/Header';
+import methods from '../../services/api';
 
 import './ExploreRecipes.css';
 

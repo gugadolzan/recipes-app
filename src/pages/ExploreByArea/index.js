@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 
-import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import Header from '../../components/Header';
 import RecipeCard from '../../components/RecipeCard';
 import RecipesContext from '../../context/RecipesContext';
-
 import methods from '../../services/api';
 
 import './ExploreByArea.css';

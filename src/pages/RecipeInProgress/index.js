@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
 
-import methods from '../../services/api';
-
-import ShareAndFavorite from '../../components/ShareAndFavorite';
 import FinishRecipeButton from './FinishRecipeButton';
+import ShareAndFavorite from '../../components/ShareAndFavorite';
+import methods from '../../services/api';
 
 const { lookup } = methods;
 

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
-import methods from '../../services/api';
 
-import Header from '../../components/Header';
 import IngredientCard from './IngredientCard';
 import Footer from '../../components/Footer';
+import Header from '../../components/Header';
+import methods from '../../services/api';
 
 import './ExploreByIngredient.css';
 

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 
-import INITIAL_LOCAL_STORAGE from '../../data';
 import LoginInput from './LoginInput';
-
+import INITIAL_LOCAL_STORAGE from '../../data';
 import logo from '../../images/logo.png';
+
 import './Login.css';
 
 function Login() {

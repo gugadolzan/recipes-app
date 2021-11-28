@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router';
 
+import SearchRadio from './SearchRadio';
 import RecipesContext from '../context/RecipesContext';
 import methods from '../services/api';
-import SearchRadio from './SearchRadio';
 
 import '../styles/SearchBar.css';
 

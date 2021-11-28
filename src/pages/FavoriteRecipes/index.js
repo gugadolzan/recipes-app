@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import Header from '../../components/Header';
-import CategoriesFilters from '../../components/CategoriesFilters';
 import FavoriteRecipeCard from './FavoriteRecipeCard';
+import CategoriesFilters from '../../components/CategoriesFilters';
+import Header from '../../components/Header';
 
 import './FavoriteRecipes.css';
 

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
+
 import RecipesContext from '../../context/RecipesContext';
 
 const THUMBNAIL_IMAGE_URL = {
