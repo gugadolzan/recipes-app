@@ -39,7 +39,12 @@ function FavoriteRecipes() {
             {favoriteRecipes
               .filter(({ type }) => type.includes(filter))
               .map((recipe, index) => (
-                <FavoriteRecipeCard key={ index } index={ index } recipe={ recipe } />
+                <FavoriteRecipeCard
+                  key={ index }
+                  index={ index }
+                  recipe={ recipe }
+                  setFavoriteRecipes={ setFavoriteRecipes }
+                />
               ))}
           </div>
         </div>

@@ -6,7 +6,11 @@ import copy from 'clipboard-copy';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import shareIcon from '../../images/shareIcon.svg';
 
-export default function FavoriteRecipeCard({ index, recipe }) {
+export default function FavoriteRecipeCard({
+  index,
+  recipe,
+  setFavoriteRecipes,
+}) {
   const { alcoholicOrNot, area, category, id, image, name, type } = recipe;
   const recipeDetailsLink = type === 'comida' ? `/comidas/${id}` : `/bebidas/${id}`;
   const [showCopyToClipboard, setShowCopyToClipboard] = useState(false);
@@ -22,8 +26,9 @@ export default function FavoriteRecipeCard({ index, recipe }) {
       'favoriteRecipes',
       JSON.stringify(newFavoriteRecipesStorage),
     );
-    // setFavoriteRecipes(newFavoriteRecipesStorage);
-    // ATUALIZAR O LOCAL STORAGE
+
+    // update the state of the favoriteRecipes
+    setFavoriteRecipes(newFavoriteRecipesStorage);
   };
 
   return (
@@ -50,10 +55,7 @@ export default function FavoriteRecipeCard({ index, recipe }) {
         >
           {name}
         </Link>
-        {/* <div className="share-and-favorite">
-          {showCopyToClipboard && (
-            <span className="share-text">Link copiado!</span>
-          )}
+        <div className="share-and-favorite">
           <input
             alt="Share button"
             data-testid={ `${index}-horizontal-share-btn` }
@@ -73,7 +75,10 @@ export default function FavoriteRecipeCard({ index, recipe }) {
             type="image"
             value={ id }
           />
-        </div> */}
+          {showCopyToClipboard && (
+            <span className="share-text">Link copiado!</span>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -82,4 +87,5 @@ export default function FavoriteRecipeCard({ index, recipe }) {
 FavoriteRecipeCard.propTypes = {
   index: PropTypes.number.isRequired,
   recipe: PropTypes.objectOf(PropTypes.string).isRequired,
+  setFavoriteRecipes: PropTypes.func.isRequired,
 };
