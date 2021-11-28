@@ -7,7 +7,7 @@ function NotFound() {
   return (
     <div className="header-footer-padding main-background">
       <div className="not-found">
-        <p>Page not found!</p>
+        <p>Not Found</p>
         <div>
           <Link to="/comidas">Return</Link>
           <span> to main page.</span>

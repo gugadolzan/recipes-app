@@ -11,7 +11,7 @@ const { lookup } = methods;
 
 function ExploreRecipes() {
   const history = useHistory();
-  const { location: { pathname } } = history;
+  const { pathname } = history.location;
 
   const [headerTitle, path, recipeId, recipeType] = pathname.includes(
     '/comidas',

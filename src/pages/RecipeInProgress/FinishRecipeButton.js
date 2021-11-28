@@ -4,9 +4,7 @@ import { useHistory } from 'react-router';
 
 export default function FinishRecipeButton({ isDisabled, recipe }) {
   const history = useHistory();
-  const {
-    location: { pathname },
-  } = history;
+  const { pathname } = history.location;
   const [idKey, imageKey, nameKey, type] = pathname.includes('/comidas')
     ? ['idMeal', 'strMealThumb', 'strMeal', 'comida']
     : ['idDrink', 'strDrinkThumb', 'strDrink', 'bebida'];

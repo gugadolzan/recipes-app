@@ -10,9 +10,7 @@ const { lookup } = methods;
 
 function RecipeInProgress({ match: { params } }) {
   const history = useHistory();
-  const {
-    location: { pathname },
-  } = history;
+  const { pathname } = history.location;
   const [recipeType, storageType, thumb, title] = pathname.includes('/comidas')
     ? ['meals', 'meals', 'strMealThumb', 'strMeal']
     : ['drinks', 'cocktails', 'strDrinkThumb', 'strDrink'];
