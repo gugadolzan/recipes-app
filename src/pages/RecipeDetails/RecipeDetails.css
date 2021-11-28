@@ -25,6 +25,32 @@
   padding: 0.5rem;
 }
 
+.recipe-details-text-container input {
+  margin-right: 0.5rem;
+}
+
+.recipe-details-text-container input:after {
+  background-color: #ccc;
+  content: '';
+  display: inline-block;
+  height: 15px;
+  left: -1px;
+  position: relative;
+  visibility: visible;
+  width: 15px;
+}
+
+.recipe-details-text-container input:checked:after {
+  background-color: #ff6710;
+  content: '';
+  display: inline-block;
+  height: 15px;
+  left: -1px;
+  position: relative;
+  visibility: visible;
+  width: 15px;
+}
+
 .recipe-header {
   align-items: center;
   display: flex;
@@ -84,6 +110,11 @@
   text-align: center;
   transition: all 0.3s;
   width: 95%;
+}
+
+.start-recipe-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
 .recipe-video {
