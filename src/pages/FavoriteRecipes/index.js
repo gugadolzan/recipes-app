@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import Header from '../../components/Header';
 import CategoriesFilters from '../../components/CategoriesFilters';
@@ -19,16 +20,30 @@ function FavoriteRecipes() {
   return (
     <>
       <Header title="Receitas Favoritas" />
-      <div className="header-footer-padding main-background">
-        <CategoriesFilters onClick={ ({ target }) => setFilter(target.value) } />
-        <div className="recipes-container">
-          {favoriteRecipes
-            .filter(({ type }) => type.includes(filter))
-            .map((recipe, index) => (
-              <FavoriteRecipeCard key={ index } index={ index } recipe={ recipe } />
-            ))}
+      {favoriteRecipes.length === 0 ? (
+        <div className="header-footer-padding main-background">
+          <div className="no-recipes-container">
+            <p>You have not favorite any recipes yet!</p>
+            <div>
+              <Link to="/comidas">Return</Link>
+              <span> to the recipes page and favorite some!</span>
+            </div>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="header-footer-padding main-background">
+          <CategoriesFilters
+            onClick={ ({ target }) => setFilter(target.value) }
+          />
+          <div className="recipes-container">
+            {favoriteRecipes
+              .filter(({ type }) => type.includes(filter))
+              .map((recipe, index) => (
+                <FavoriteRecipeCard key={ index } index={ index } recipe={ recipe } />
+              ))}
+          </div>
+        </div>
+      )}
     </>
   );
 }
