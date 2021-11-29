@@ -9,10 +9,10 @@ import '../styles/Footer.css';
 
 const FOOTER_BUTTONS = [
   {
-    alt: 'drink icon',
-    dataTestId: 'drinks-bottom-btn',
-    to: '/bebidas',
-    src: drinkIcon,
+    alt: 'meal icon',
+    dataTestId: 'food-bottom-btn',
+    to: '/comidas',
+    src: mealIcon,
   },
   {
     alt: 'explore icon',
@@ -21,23 +21,21 @@ const FOOTER_BUTTONS = [
     src: exploreIcon,
   },
   {
-    alt: 'meal icon',
-    dataTestId: 'food-bottom-btn',
-    to: '/comidas',
-    src: mealIcon,
+    alt: 'drink icon',
+    dataTestId: 'drinks-bottom-btn',
+    to: '/bebidas',
+    src: drinkIcon,
   },
 ];
 
-function Footer() {
+export default function Footer() {
   return (
-    <div className="footer" data-testid="footer">
+    <footer className="footer" data-testid="footer">
       {FOOTER_BUTTONS.map(({ alt, dataTestId, src, to }) => (
         <Link key={ alt } to={ to }>
           <img alt={ alt } data-testid={ dataTestId } src={ src } />
         </Link>
       ))}
-    </div>
+    </footer>
   );
 }
-
-export default Footer;

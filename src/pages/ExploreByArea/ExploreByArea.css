@@ -1,0 +1,37 @@
+.explore-by-area-recipes {
+  animation-duration: 1s;
+  animation-name: animatebottom;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+@keyframes animatebottom {
+
+  from { bottom: -100px;
+    opacity: 0; }
+
+  to { bottom: 0;
+    opacity: 1; }
+}
+
+.explore-by-area-dropdown {
+  background-color: #ff6710;
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  color: #141414;
+  display: flex;
+  margin: 1rem auto;
+  padding: 0.4rem;
+  width: 50%;
+}
+
+.explore-by-area-dropdown:focus {
+  outline: none;
+}
+
+.explore-by-area-dropdown option {
+  background-color: #ff6710;
+  font-size: 1rem;
+}

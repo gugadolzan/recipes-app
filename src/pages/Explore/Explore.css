@@ -2,14 +2,22 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
+  /* 8rem from header-footer-padding class */
+  height: calc(100vh - 8rem);
+  justify-content: space-around;
+  transition: all 0.1s;
 }
 
 .explore-links > * {
-  background-color: #ccc;
-  border-radius: 5px;
-  color: black;
-  font-size: 1.5em;
-  margin: 1rem;
-  padding: 1rem 4rem;
+  background-color: #f8f8f8;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  color: #141414;
+  font-size: 1.2em;
+  padding: 1.2rem 4rem;
+}
+
+.explore-links > *:hover {
+  opacity: 0.9;
 }

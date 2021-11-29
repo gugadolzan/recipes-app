@@ -2,17 +2,26 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
+  /* 8rem from header-footer-padding class */
+  height: calc(100vh - 8rem);
+  justify-content: space-around;
 }
 
 .explore-recipes-links > * {
-  background-color: #ccc;
+  background-color: #f8f8f8;
   border: none;
-  border-radius: 5px;
-  color: black;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  color: #141414;
   cursor: pointer;
-  font-size: 1.5em;
+  font-size: 1.2em;
   margin: 1rem;
-  padding: 1rem;
+  padding: 1.2rem 4rem;
+  transition: all 0.1s;
   width: 20rem;
+}
+
+.explore-recipes-links > *:hover {
+  opacity: 0.9;
 }

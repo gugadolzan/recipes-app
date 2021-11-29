@@ -15,7 +15,7 @@ import {
   NotFound,
 } from '../pages';
 
-function Routes() {
+export default function Routes() {
   return (
     <Switch>
       <Route exact path="/" component={ Login } />
@@ -44,5 +44,3 @@ function Routes() {
     </Switch>
   );
 }
-
-export default Routes;

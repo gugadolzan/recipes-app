@@ -14,8 +14,10 @@ const MAX_CATEGORIES = 5;
 const MAX_RECIPES = 12;
 
 function MainPage() {
-  const { recipes, setRecipes } = useContext(RecipesContext);
+  const { ingredient, setIngredient, recipes, setRecipes } = useContext(RecipesContext);
+
   const { pathname } = useLocation();
+
   const [categories, setCategories] = useState([]);
   const [filter, setFilter] = useState('All');
   const [loading, setLoading] = useState(true);
@@ -26,13 +28,24 @@ function MainPage() {
 
   useEffect(() => {
     setLoading(true);
+
     const fetchData = async () => {
-      const response = await searchBy.name(recipeType);
-      setRecipes(response[recipeType]);
-      setLoading(false);
+      const response = ingredient
+        ? await searchBy.ingredient(recipeType, ingredient)
+        : await searchBy.name(recipeType);
+      // setIngredient('');
+      // setRecipes(response[recipeType]);
+
+      if (response) {
+        setRecipes(response[recipeType]);
+        setLoading(false);
+      }
     };
+
     fetchData();
-  }, [recipeType, setRecipes]);
+  }, [ingredient, recipeType, setRecipes]);
+
+  useEffect(() => () => setIngredient(''), [recipeType, setIngredient]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -42,6 +55,7 @@ function MainPage() {
         .slice(0, MAX_CATEGORIES);
       setCategories(['All', ...categoryKeys]);
     };
+
     fetchCategories();
   }, [recipeType]);
 
@@ -63,7 +77,7 @@ function MainPage() {
   return (
     <>
       <Header title={ headerTitle } />
-      <div className="header-padding-top main-background">
+      <div className="header-footer-padding main-background">
         <div className="category-filter-container">
           {categories.map((category) => (
             <button
@@ -79,7 +93,7 @@ function MainPage() {
           ))}
         </div>
         {loading ? (
-          <div>Carregando...</div>
+          <div className="loader" />
         ) : (
           <div className="recipes-container">
             {recipes.slice(0, MAX_RECIPES).map((recipe, index) => (

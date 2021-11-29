@@ -1,4 +1,5 @@
-// initial localStorage:
+// initial localStorage
+
 export default [
   {
     key: 'mealsToken',

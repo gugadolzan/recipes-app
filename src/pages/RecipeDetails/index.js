@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 
-import methods from '../../services/api';
-
 import RecipeIngredients from './RecipeIngredients';
 import Recomendations from './Recomendations';
-import ShareAndFavorite from './ShareAndFavorite';
+import ShareAndFavorite from '../../components/ShareAndFavorite';
+import methods from '../../services/api';
 
 import './RecipeDetails.css';
 
@@ -35,20 +34,22 @@ function RecipeDetails({ match: { params } }) {
 
   // fetch recipe details
   useEffect(() => {
-    setLoading(true);
-    const fetchRecipe = async () => {
+    const fetchRecipeDetails = async () => {
       const response = await lookup.details(recipeType, params.id);
       setRecipe(response[recipeType][0]);
       setLoading(false);
     };
-    fetchRecipe();
+
+    fetchRecipeDetails();
   }, [params.id, recipeType]);
+
   // fetch recomendations
   useEffect(() => {
     const fetchRecomendations = async () => {
       const response = await searchBy.name(reverseType);
       setRecomendations(response[reverseType]);
     };
+
     fetchRecomendations();
   }, [reverseType]);
 
@@ -59,9 +60,7 @@ function RecipeDetails({ match: { params } }) {
     (curr) => curr[0].includes('strMeasure') && curr[1],
   );
 
-  if (loading) {
-    return <div>Carregando...</div>;
-  }
+  if (loading) return <div className="loader" />;
 
   return (
     <div className="recipe-details">
@@ -71,32 +70,43 @@ function RecipeDetails({ match: { params } }) {
         data-testid="recipe-photo"
         src={ recipe[thumb] }
       />
-      <h1 data-testid="recipe-title">{recipe[title]}</h1>
-      <h3 data-testid="recipe-category">
-        {pathname.includes('/comidas')
-          ? recipe.strCategory
-          : recipe.strAlcoholic}
-      </h3>
-
-      <ShareAndFavorite recipe={ recipe } />
-
-      <RecipeIngredients
-        ingredients={ recipeIngredients }
-        measures={ ingredientsMeasures }
-      />
-
-      <h2 data-testid="instructions">Instructions</h2>
-      <p data-testid="instructions">{recipe.strInstructions}</p>
+      <div className="recipe-header">
+        <div className="recipe-title-container">
+          <h1 data-testid="recipe-title">{recipe[title]}</h1>
+          <h3 data-testid="recipe-category">
+            {pathname.includes('/comidas')
+              ? recipe.strCategory
+              : recipe.strAlcoholic}
+          </h3>
+        </div>
+        <ShareAndFavorite recipe={ recipe } />
+      </div>
+      <h2 className="recipe-title">Ingredients</h2>
+      <div className="recipe-details-text-container">
+        <RecipeIngredients
+          ingredients={ recipeIngredients }
+          measures={ ingredientsMeasures }
+        />
+      </div>
+      <h2 className="recipe-title" data-testid="instructions">
+        Instructions
+      </h2>
+      <p
+        className="recipe-details-text-container recipe-instructions"
+        data-testid="instructions"
+      >
+        {recipe.strInstructions}
+      </p>
       {pathname.includes('/comidas') && recipe.strYoutube && (
         <iframe
+          className="recipe-video"
           data-testid="video"
           title="How to"
           src={ recipe.strYoutube.replace('watch?v=', 'embed/') }
         />
       )}
-
+      <h2 className="recipe-title">Recomendations</h2>
       <Recomendations recomendations={ recomendations } />
-
       <Link
         className="start-recipe-btn"
         data-testid="start-recipe-btn"

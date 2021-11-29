@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router';
 
+import SearchRadio from './SearchRadio';
 import RecipesContext from '../context/RecipesContext';
 import methods from '../services/api';
-import SearchRadio from './SearchRadio';
 
 import '../styles/SearchBar.css';
 
@@ -11,28 +11,29 @@ const { searchBy } = methods;
 const SEARCH_RADIO_OPTIONS = [
   {
     id: 'ingredient',
-    label: 'Ingrediente',
+    label: 'Ingredient',
   },
   {
     id: 'name',
-    label: 'Nome',
+    label: 'Name',
   },
   {
     id: 'first-letter',
-    label: 'Primeira letra',
+    label: 'First letter',
   },
 ];
 
-function SearchBar() {
+export default function SearchBar() {
   const { setRecipes } = useContext(RecipesContext);
+
   const history = useHistory();
+  const { pathname } = history.location;
+
   const [searchInput, setSearchInput] = useState('');
   const [searchRadio, setSearchRadio] = useState('');
 
-  const { pathname } = history.location;
   const [recipeId, recipeType] = pathname === '/comidas'
-    ? ['idMeal', 'meals']
-    : ['idDrink', 'drinks'];
+    ? ['idMeal', 'meals'] : ['idDrink', 'drinks'];
 
   const fetchData = async (type) => {
     const response = await searchBy[type](recipeType, searchInput);
@@ -78,7 +79,7 @@ function SearchBar() {
         className="search-bar-input"
         data-testid="search-input"
         onChange={ ({ target }) => setSearchInput(target.value) }
-        placeholder="Buscar receita"
+        placeholder="Search Recipe"
         type="text"
         value={ searchInput }
       />
@@ -100,10 +101,8 @@ function SearchBar() {
         disabled={ !searchInput || !searchRadio }
         type="submit"
       >
-        Buscar
+        Search
       </button>
     </form>
   );
 }
-
-export default SearchBar;

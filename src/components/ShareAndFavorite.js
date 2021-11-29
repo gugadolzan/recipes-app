@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
+import PropTypes from 'prop-types';
 
-import blackHeartIcon from '../../images/blackHeartIcon.svg';
-import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
-import shareIcon from '../../images/shareIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+
+import '../styles/ShareAndFavorite.css';
 
 export default function ShareAndFavorite({ recipe }) {
   const [id, image, name, type] = Object.keys(recipe)[0].includes('Meal')
@@ -53,18 +55,19 @@ export default function ShareAndFavorite({ recipe }) {
   };
 
   return (
-    <>
+    <div className="share-and-favorite">
+      {showCopyToClipboard && <span className="share-text">Link copiado!</span>}
       <input
         alt="Share button"
         data-testid="share-btn"
         onClick={ () => {
           setShowCopyToClipboard(true);
-          copy(window.location.href);
+          const url = window.location.href.split('/');
+          copy(`${url[0]}//${url[2]}/${type}s/${recipe[id]}`);
         } }
         src={ shareIcon }
         type="image"
       />
-      {showCopyToClipboard && <span>Link copiado!</span>}
       <input
         alt="Favorite button"
         data-testid="favorite-btn"
@@ -72,7 +75,7 @@ export default function ShareAndFavorite({ recipe }) {
         src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
         type="image"
       />
-    </>
+    </div>
   );
 }
 

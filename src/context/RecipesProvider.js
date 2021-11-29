@@ -7,8 +7,9 @@ const { Provider } = RecipesContext;
 
 function RecipesProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
+  const [ingredient, setIngredient] = useState('');
 
-  const value = { recipes, setRecipes };
+  const value = { ingredient, setIngredient, recipes, setRecipes };
 
   return <Provider value={ value }>{children}</Provider>;
 }

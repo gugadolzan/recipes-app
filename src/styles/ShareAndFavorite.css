@@ -1,0 +1,14 @@
+.share-and-favorite {
+  align-items: center;
+  display: flex;
+}
+
+.share-and-favorite > * {
+  margin: 0 0.2rem;
+}
+
+.share-text {
+  background-color: #f8f8f8;
+  border-radius: 0.2rem;
+  padding: 0.2rem 0.5rem;
+}

@@ -9,7 +9,7 @@ import searchIcon from '../images/searchIcon.svg';
 
 import '../styles/Header.css';
 
-function Header({ title }) {
+export default function Header({ title }) {
   const { pathname } = useLocation();
 
   const [showSearchBar, setShowSearchBar] = useState(false);
@@ -50,5 +50,3 @@ function Header({ title }) {
 Header.propTypes = {
   title: PropTypes.string.isRequired,
 };
-
-export default Header;

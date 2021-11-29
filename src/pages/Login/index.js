@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 
-import INITIAL_LOCAL_STORAGE from '../../data';
 import LoginInput from './LoginInput';
-
+import INITIAL_LOCAL_STORAGE from '../../data';
 import logo from '../../images/logo.png';
+
 import './Login.css';
 
 function Login() {
@@ -15,9 +15,11 @@ function Login() {
 
   const handleCLick = async (e) => {
     e.preventDefault();
+
     INITIAL_LOCAL_STORAGE.forEach(({ key, value }) => (key === 'user'
       ? localStorage.setItem('user', JSON.stringify({ email }))
       : localStorage.setItem(key, JSON.stringify(value))));
+
     history.push('/comidas');
   };
 
@@ -32,7 +34,7 @@ function Login() {
   };
 
   return (
-    <div className="main-background">
+    <div className="login-background">
       <img alt="logo" className="logo" src={ logo } />
       <form className="login-form" onSubmit={ handleCLick }>
         <LoginInput
