@@ -6,15 +6,17 @@ Este projeto trata-se de um app de receitas, utilizando o que há de mais modern
 
 Nela é possível ver, buscar, filtrar, favoritar e acompanhar o processo de preparação de receitas e drinks!
 
-A base de dados serão 2 APIs distintas, uma para comidas e outra para bebidas.
+A base de dados são 2 APIs distintas, uma para comidas e outra para bebidas.
 
 O layout tem como foco dispositivos móveis, então todos os protótipos vão estar desenvolvidos em telas menores.
 
 ## Tecnologias usadas
 
-> Desenvolvido usando: React, Context API e React Hooks
+- React
+- Context API
+- React Hooks
 
-## Instalando Dependências
+## Instalando dependências
 
 ```bash
 npm install
